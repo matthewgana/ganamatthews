@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import clsx from "clsx";
-import { Sun, Moon, Globe, Menu, X, ArrowUpRight } from "lucide-react";
+import { Sun, Moon, Menu, X, ArrowUpRight, Download } from "lucide-react";
 import { useTranslation } from "@/providers/IntlProvider";
 import { useTheme } from "@/providers/ThemeProvider";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import styles from "./Header.module.css";
 
 export const Header: React.FC = () => {
-  const { t, language, setLanguage } = useTranslation();
+  const { t } = useTranslation();
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,14 +20,16 @@ export const Header: React.FC = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Section tracking for active indicator
-      const sections = ["home", "work", "engineering", "evidence", "about", "writing", "contact"];
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
+      const sectionIds = ["contact", "about", "credentials", "aiml", "work", "home"];
+      const scrollPosition = window.scrollY + 140;
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
         if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120 && rect.bottom >= 120) {
-            setActiveSection(sectionId);
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(id);
             break;
           }
         }
@@ -34,18 +37,32 @@ export const Header: React.FC = () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleLang = () => {
-    setLanguage(language === "en" ? "fr" : "en");
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const heroSection = document.getElementById("home");
+    if (heroSection) {
+      heroSection.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    window.history.pushState(null, "", "#home");
+    setActiveSection("home");
   };
 
   return (
     <header className={clsx(styles.header, scrolled && styles.scrolled)}>
       <div className={styles.container}>
-        {/* Brand Monogram */}
-        <Link href="#home" className={styles.brand} aria-label="Matthew Gana Portfolio">
+        {/* Brand Monogram — Smooth scroll back to hero */}
+        <Link 
+          href="#home" 
+          onClick={handleLogoClick}
+          className={styles.brand} 
+          aria-label="Matthew Gana Portfolio - Back to top"
+        >
           <div className={styles.monogram}>MG</div>
           <div className={styles.brandText}>
             <span className={styles.brandName}>Matthew Gana</span>
@@ -53,14 +70,8 @@ export const Header: React.FC = () => {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Navigation Links (Audited 5 core sections) */}
         <nav className={styles.desktopNav} aria-label="Primary navigation">
-          <a
-            href="#home"
-            className={clsx(styles.navLink, activeSection === "home" && styles.activeNavLink)}
-          >
-            {t.nav.home}
-          </a>
           <a
             href="#work"
             className={clsx(styles.navLink, activeSection === "work" && styles.activeNavLink)}
@@ -68,22 +79,22 @@ export const Header: React.FC = () => {
             {t.nav.work}
           </a>
           <a
-            href="#engineering"
-            className={clsx(styles.navLink, activeSection === "engineering" && styles.activeNavLink)}
+            href="#aiml"
+            className={clsx(styles.navLink, activeSection === "aiml" && styles.activeNavLink)}
           >
-            {t.nav.engineering}
+            {t.nav.aiml}
+          </a>
+          <a
+            href="#credentials"
+            className={clsx(styles.navLink, activeSection === "credentials" && styles.activeNavLink)}
+          >
+            {t.nav.credentials}
           </a>
           <a
             href="#about"
             className={clsx(styles.navLink, activeSection === "about" && styles.activeNavLink)}
           >
             {t.nav.about}
-          </a>
-          <a
-            href="#writing"
-            className={clsx(styles.navLink, activeSection === "writing" && styles.activeNavLink)}
-          >
-            {t.nav.writing}
           </a>
           <a
             href="#contact"
@@ -93,18 +104,23 @@ export const Header: React.FC = () => {
           </a>
         </nav>
 
-        {/* Actions: Theme Toggle, Language Switcher, Mobile Menu */}
+        {/* Actions: Download CV, Language Switcher, Theme Toggle, Mobile Menu */}
         <div className={styles.actions}>
-          {/* Language Switcher */}
-          <button
-            type="button"
-            onClick={toggleLang}
-            className={styles.langSelect}
-            aria-label={`Switch language from ${language.toUpperCase()}`}
+          {/* Download CV CTA Button */}
+          <a
+            href="/gmatts-cv.pdf"
+            download="Matthew_Gana_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.downloadCvButton}
+            aria-label={`${t.nav.downloadCv || "Download CV"} (PDF)`}
           >
-            <Globe size={14} />
-            <span>{language.toUpperCase()}</span>
-          </button>
+            <Download size={15} />
+            <span>{t.nav.downloadCv || "Download CV"}</span>
+          </a>
+
+          {/* Language Switcher */}
+          <LanguageSwitcher />
 
           {/* Theme Toggle */}
           <button
@@ -121,7 +137,7 @@ export const Header: React.FC = () => {
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={styles.mobileMenuToggle}
-            aria-label="Toggle mobile menu"
+            aria-label={mobileMenuOpen ? t.nav.closeMenu : t.nav.openMenu}
             aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -145,7 +161,7 @@ export const Header: React.FC = () => {
       >
         <div>
           <div className={styles.drawerHeader}>
-            <div className={styles.brand}>
+            <div className={styles.brand} onClick={handleLogoClick}>
               <div className={styles.monogram}>MG</div>
               <span className={styles.brandName}>Matthew Gana</span>
             </div>
@@ -162,7 +178,10 @@ export const Header: React.FC = () => {
           <nav className={styles.drawerNav}>
             <a
               href="#home"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                handleLogoClick(e);
+              }}
               className={styles.drawerNavLink}
             >
               <span>{t.nav.home}</span>
@@ -175,18 +194,18 @@ export const Header: React.FC = () => {
               <span>{t.nav.work}</span>
             </a>
             <a
-              href="#engineering"
+              href="#aiml"
               onClick={() => setMobileMenuOpen(false)}
               className={styles.drawerNavLink}
             >
-              <span>{t.nav.engineering}</span>
+              <span>{t.nav.aiml}</span>
             </a>
             <a
-              href="#evidence"
+              href="#credentials"
               onClick={() => setMobileMenuOpen(false)}
               className={styles.drawerNavLink}
             >
-              <span>{t.evidence.title}</span>
+              <span>{t.nav.credentials}</span>
             </a>
             <a
               href="#about"
@@ -194,13 +213,6 @@ export const Header: React.FC = () => {
               className={styles.drawerNavLink}
             >
               <span>{t.nav.about}</span>
-            </a>
-            <a
-              href="#writing"
-              onClick={() => setMobileMenuOpen(false)}
-              className={styles.drawerNavLink}
-            >
-              <span>{t.nav.writing}</span>
             </a>
             <a
               href="#contact"
@@ -215,21 +227,21 @@ export const Header: React.FC = () => {
         <div className={styles.drawerFooter}>
           <a
             href="/gmatts-cv.pdf"
+            download="Matthew_Gana_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.drawerNavLink}
+            className={styles.drawerDownloadButton}
+            onClick={() => setMobileMenuOpen(false)}
           >
-            <span>{t.nav.resume} (PDF)</span>
-            <ArrowUpRight size={16} />
+            <Download size={16} />
+            <span>{t.nav.downloadCv || "Download CV"} (PDF)</span>
           </a>
-          <div style={{ display: "flex", gap: "0.75rem", marginTop: "0.5rem" }}>
-            <button type="button" onClick={toggleLang} className={styles.langSelect}>
-              <Globe size={14} />
-              <span>{language === "en" ? "Passer en Français" : "Switch to English"}</span>
-            </button>
+          <div style={{ marginTop: "0.5rem" }}>
+            <LanguageSwitcher variant="drawer" onSelect={() => setMobileMenuOpen(false)} />
           </div>
         </div>
       </div>
     </header>
   );
 };
+export default Header;

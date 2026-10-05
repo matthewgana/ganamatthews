@@ -1,5 +1,5 @@
 .flagships {
-  padding: 6.5rem 1.5rem;
+  padding: 4.5rem 1.5rem;
   background-color: var(--bg-secondary);
   position: relative;
   border-top: 1px solid var(--border-subtle);
@@ -13,15 +13,16 @@
 .headerRow {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 3.5rem;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
 }
 
 @media (min-width: 768px) {
   .headerRow {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -32,6 +33,7 @@
 .eyebrowGroup {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
@@ -74,6 +76,7 @@
   color: var(--text-primary);
   transition: color var(--transition-fast), transform var(--transition-fast);
   white-space: nowrap;
+  margin-top: 1rem;
 }
 
 .viewAllLink:hover {

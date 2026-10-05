@@ -134,7 +134,7 @@ export const PROJECTS: Project[] = [
     technologies: ["NestJS", "TypeScript", "PostgreSQL", "MongoDB", "Redis", "BullMQ", "Next.js", "React Native"],
     architectureSummary: "Transactional financial core ensuring balanced ledger invariants, supported by Redis queues for heavy accounting calculations and mobile sync.",
     keyEvidence: "Working implementation of double-entry ledger models, loan lifecycle state machines, and offline reconciliation handlers.",
-    image: "/project-assets/ventra.png",
+    image: "/project-assets/ventra.jpg",
     isFlagship: false,
     githubUrl: "https://github.com/matthewgana",
     caveat: "Demonstrates rigorous financial domain engineering; not currently deployed as an active regulated banking institution."
@@ -237,7 +237,7 @@ export const PROJECTS: Project[] = [
     technologies: ["Python", "Django", "PostgreSQL", "Redis", "Celery"],
     architectureSummary: "Modular Django architecture organized across 12 station applications, utilizing Celery queues for station reconciliation jobs.",
     keyEvidence: "12 Django applications structured for station operations, inventory tracking, and sales logs.",
-    image: "/project-assets/fuelix.png",
+    image: "/project-assets/fuelix.jpg",
     isFlagship: false,
     githubUrl: "https://github.com/matthewgana",
     caveat: "Early-stage Python/Django prototype demonstrating domain modelling and technology breadth; minimal active API endpoints and no automated tests."
@@ -262,7 +262,7 @@ export const PROJECTS: Project[] = [
     technologies: ["NestJS", "TypeScript", "PostgreSQL", "Redis", "BullMQ", "Next.js"],
     architectureSummary: "Clean NestJS modular foundation designed for property asset lifecycles and asynchronous task dispatch.",
     keyEvidence: "Initial set of domain modules and relational schemas for property units, lease documents, and maintenance work orders.",
-    image: "/project-assets/estrava.png",
+    image: "/project-assets/estrava.jpg",
     isFlagship: false,
     githubUrl: "https://github.com/matthewgana",
     caveat: "Early-stage real estate prototype; mobile client remains in early scaffolding and is not presented as an active production app."
@@ -286,7 +286,7 @@ export const PROJECTS: Project[] = [
     technologies: ["NestJS", "TypeScript", "PostgreSQL", "Turborepo"],
     architectureSummary: "Early architectural prototype demonstrating domain boundary decomposition for civic identity and institutional governance.",
     keyEvidence: "Monorepo scaffolding and initial NestJS domain models for civic information and identity architectures.",
-    image: "/project-assets/civora.png",
+    image: "/project-assets/civora.jpg",
     isFlagship: false,
     githubUrl: "https://github.com/matthewgana",
     caveat: "Early architectural prototype with limited commit history; presented as domain design exploration rather than active government infrastructure."

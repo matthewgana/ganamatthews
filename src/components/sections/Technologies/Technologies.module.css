@@ -42,7 +42,7 @@
 
     position: relative;
     width: 100%;
-    padding: 6.5rem 1.5rem 7.5rem;
+    padding: 4.5rem 1.5rem 3rem;
     overflow: hidden;
     isolation: isolate;
     background: 
@@ -697,29 +697,66 @@
     line-height: 1.5;
 }
 
-/* Footer Tag List */
-.footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 3rem;
+/* ── TICKER MARQUEE FOR TECHNOLOGIES TAGS ─────────────── */
+.tickerOuter {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 2rem;
     position: relative;
     z-index: 2;
+    padding: 0.5rem 0;
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+    );
+}
+
+.tickerTrack {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: max-content;
+    animation: techTickerScroll 35s linear infinite;
+}
+
+.tickerOuter:hover .tickerTrack,
+.tickerOuter:focus-within .tickerTrack {
+    animation-play-state: paused;
+}
+
+@keyframes techTickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
 }
 
 .footerTag {
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.35rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.45rem 1rem;
     background: var(--tech-footer-tag-bg);
-    border: 1px solid var(--tech-footer-tag-border);
+    border: 1.5px solid var(--tech-footer-tag-border);
     border-radius: var(--radius-full);
     color: var(--tech-footer-tag-color);
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap;
     transition: all var(--transition-fast);
+    cursor: default;
 }
 
 .footerTag:hover {
     background: var(--tech-footer-tag-hover-bg);
+    border-color: var(--accent-subtle-border);
     color: var(--tech-footer-tag-hover-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }

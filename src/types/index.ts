@@ -1,4 +1,13 @@
-export type Language = "en" | "fr";
+export type Language = "en" | "fr" | "pt" | "ar" | "ja" | "de" | "es" | "zh-CN";
+export type Direction = "ltr" | "rtl";
+
+export interface LocaleMeta {
+  code: Language;
+  name: string;
+  nativeName: string;
+  dir: Direction;
+}
+
 export type Theme = "light" | "dark";
 
 export type ProjectMaturity = "Functional MVP" | "Working Prototype" | "Early Prototype";
@@ -29,14 +38,23 @@ export type CredentialCategory =
   | "Data Analytics"
   | "AI & Machine Learning";
 
+export type CredentialStatus = "verified" | "accredited" | "ongoing";
+
 export interface Credential {
   id: string;
   category: CredentialCategory;
   title: string;
   issuer?: string;
   year?: string;
+  status?: CredentialStatus;
+  statusBadge?: string;
+  credentialCode?: string;
+  skills?: string[];
   verificationUrl?: string;
   imageFile?: string;
+  targetDate?: string;
+  progressPercent?: number;
+  description?: string;
 }
 
 export interface Project {
@@ -59,4 +77,39 @@ export interface Project {
   caveat?: string;
 }
 
-export interface EngineeringCapabi
+export interface EngineeringCapability {
+  id: string;
+  number: string;
+  title: string;
+  description: string;
+  icon: string;
+  keySkills: string[];
+}
+
+export interface MetricItem {
+  id: string;
+  value: string;
+  numericTarget?: number;
+  label: string;
+  detail: string;
+  category: "architecture" | "industry" | "technology";
+}
+
+export interface EngineeringStep {
+  step: string;
+  title: string;
+  subtitle: string;
+  summary: string;
+  coreActivities: string[];
+  deliverable: string;
+  architecturalGuarantee: string;
+}
+
+export interface TechItem {
+  id: string;
+  name: string;
+  category: "backend" | "frontend" | "database" | "ai" | "infrastructure" | "security";
+  domain: string;
+  color: string;
+  description: string;
+}

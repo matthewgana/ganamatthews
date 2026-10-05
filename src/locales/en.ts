@@ -1,43 +1,70 @@
 export const en = {
+  common: {
+    dir: "ltr" as "ltr" | "rtl",
+    language: "Language",
+    selectLanguage: "Select language",
+    close: "Close",
+    open: "Open"
+  },
   nav: {
     home: "Home",
     work: "Work",
     engineering: "Engineering",
+    aiml: "AI / ML",
+    credentials: "Credentials",
+    evidence: "Evidence",
     about: "About",
     writing: "Writing",
     contact: "Contact",
     viewProjects: "View Selected Work",
     contactMe: "Contact Me",
     resume: "Resume",
+    downloadCv: "Download CV",
     github: "GitHub",
-    linkedin: "LinkedIn"
+    linkedin: "LinkedIn",
+    openMenu: "Open navigation menu",
+    closeMenu: "Close navigation menu"
   },
   hero: {
     badge: "Building Digital Solutions for a Better Tomorrow",
     eyebrow: "FULL-STACK SOFTWARE ENGINEER",
     titlePrefix: "Building secure, scalable, and intelligent ",
     titleHighlight: "software systems.",
+    titleFullStack: "Full-Stack",
+    titleSoftware: "Software",
+    titleEngineer: "Engineer",
     subtitle: "Backend-focused full-stack engineer designing domain-rich SaaS, enterprise APIs, data-driven systems, web/mobile applications, and AI/ML integrations.",
     specialties: "Backend • SaaS • Architecture • AI/ML • Security",
+    specialtiesList: ["Backend", "SaaS", "Architecture", "AI/ML", "Security"],
     handwritten: "Better Systems, Greater Impact",
     ctaPrimary: "View My Projects",
-    ctaSecondary: "Contact Me"
+    ctaSecondary: "Contact Me",
+    verifiedSystems: "11 Systems Audited & Verified"
   },
   tech: {
     badge: "TECH STACK",
     title: "Technologies I Work With",
     subtitle: "I use a modern and proven stack to build scalable, maintainable, and secure applications. Here are the core technologies I work with across my projects.",
     codeComment: "// Build. Ship. Improve.",
-    viewAll: "Interactive Topology View",
+    viewAll: "Explore Interactive Topology",
     terminalView: "Code Architecture View",
     statusReady: "System Topology Online",
     statusDesc: "Hover or select any node to inspect architectural domain, connection weights, and implementation role.",
+    topologyBadge: "SYSTEM TOPOLOGY NETWORK",
+    topologyTitle: "Architectural Dependency Mesh",
+    topologyDesc: "Hover or focus on any architectural node to inspect runtime specifications, portfolio adoption ratios, and engineering responsibilities.",
+    telemetryActive: "TELEMETRY: NODE INSPECTION ACTIVE",
+    telemetryReady: "TOPOLOGY TELEMETRY READY",
+    missionControlTitle: "MISSION CONTROL READY",
+    missionControlDesc: "Select or hover over any node in the left or right columns to inspect runtime specifications, portfolio adoption ratios, and architectural roles.",
+    portfolioUsage: "Portfolio Usage",
+    runtimeEngine: "Runtime Engine",
     categories: {
       backend: "Backend",
       frontend: "Frontend",
       database: "Database",
       ai: "AI / ML",
-      infra: "DevOps & Infra",
+      infra: "DevOps",
       security: "Security"
     }
   },
@@ -88,19 +115,70 @@ export const en = {
     statusLabel: "Maturity",
     verifiedBadge: "Audited & Verified",
     caveatLabel: "Technical Audit Note",
-    modalClose: "Close details"
+    modalClose: "Close details",
+    operationalProblem: "Operational Problem",
+    engineeringSolution: "Engineering Solution",
+    auditSource: "Repository Audit Source: Verified Workspace Evidence",
+    inspectGithub: "Inspect on GitHub",
+    scrollLeft: "Scroll projects left",
+    scrollRight: "Scroll projects right",
+    viewAuditFor: "View technical audit for",
+    maturities: {
+      mvp: "Functional MVP",
+      working: "Working Prototype",
+      early: "Early Prototype"
+    }
   },
   evidence: {
     badge: "ENGINEERING EVIDENCE",
     title: "Built. Audited. Verifiable.",
     subtitle: "These projects are real software systems with verifiable code, architecture, and implementation evidence from their repositories.",
     cta: "View Technical Details",
-    disclaimer: "These are real software systems designed and implemented across different stages of maturity — not claims of production-scale commercial deployments."
+    disclaimer: "These are real software systems designed and implemented across different stages of maturity — not claims of production-scale commercial deployments.",
+    metrics: {
+      products: {
+        label: "Products",
+        detail: "Distinct software systems designed, modelled, and implemented across diverse domains."
+      },
+      industries: {
+        label: "Industries",
+        detail: "Spanning AgriTech, FinTech, HealthTech, Hospitality, EdTech, GovTech, RestaurantTech, and PropTech."
+      },
+      nestjs: {
+        label: "NestJS",
+        detail: "Enterprise-grade TypeScript backend framework with IoC and domain modules."
+      },
+      postgresql: {
+        label: "PostgreSQL",
+        detail: "Relational persistence, ACID compliance, and schema-level domain separation."
+      },
+      nextjs: {
+        label: "Next.js/React",
+        detail: "Modern server and client-side web rendering pipelines for responsive dashboards."
+      },
+      reactnative: {
+        label: "React Native",
+        detail: "Cross-platform mobile applications with offline queueing and synchronization."
+      },
+      redis: {
+        label: "Redis",
+        detail: "High-performance distributed caching, rate-limiting, and task queues (BullMQ)."
+      },
+      fastapi: {
+        label: "FastAPI (AI)",
+        detail: "Dedicated Python microservices for prediction models, BKT, and LLM integrations."
+      }
+    }
   },
   approach: {
     badge: "METHODOLOGY",
     title: "Engineering Approach & Architecture",
-    subtitle: "A systematic workflow from initial problem discovery to resilient, tested system iteration."
+    subtitle: "A systematic workflow from initial problem discovery to resilient, tested system iteration.",
+    pipelineLabel: "Engineering methodology pipeline",
+    phaseSpecification: "Phase {step} of 11 • Architectural Specification",
+    activitiesHeading: "Core Engineering Activities & Mechanisms",
+    deliverableHeading: "Concrete Architectural Deliverable",
+    guaranteeHeading: "Systemic Stability Guarantee"
   },
   about: {
     badge: "ABOUT ME",
@@ -111,36 +189,111 @@ export const en = {
     remoteDesc: "Open to international opportunities",
     basedIn: "Based in",
     basedDesc: "Nigeria (Flexible / UTC+1)",
+    mobilityTitle: "International Mobility",
+    mobilityDesc: "International passport available · Open to international remote opportunities and engagements.",
     stemTitle: "Beyond Software",
     stemDesc: "I also teach mathematics, physics, chemistry, and programming, creating technical educational content and translating complex STEM concepts into clear, intuitive frameworks.",
-    learnMore: "Learn more"
+    learnMore: "Learn more",
+    youtubeChannel: "YouTube Channel: Learn With Matthew Gana",
+    instagramProfile: "Instagram: Learn With Matthew Gana"
   },
   writing: {
     badge: "TECHNICAL COMMUNICATION",
     title: "Writing & Architectural Notes",
-    subtitle: "Insights on domain modelling, API security, and systems engineering."
+    subtitle: "Insights on domain modelling, API security, and systems engineering.",
+    upcomingNote: "Upcoming Note",
+    articles: [
+      {
+        category: "Architecture & DDD",
+        title: "Domain-Driven Boundary Decomposition in Modular Monoliths",
+        excerpt: "Why schema-level isolation and strict dependency inversion outperform premature microservice splitting for high-concurrency business platforms."
+      },
+      {
+        category: "Security & FinTech",
+        title: "Enforcing Double-Entry Ledger Invariants & Payment Idempotency",
+        excerpt: "Designing tamper-resistant accounting engines with transactional balance assertions, idempotency key caches, and offline conflict resolution."
+      },
+      {
+        category: "AI & Algorithmic Learning",
+        title: "Demystifying Bayesian Knowledge Tracing (BKT) in EdTech Systems",
+        excerpt: "A practical guide to modelling student cognitive skill acquisition over time using probabilistic latent state transitions in production TypeScript."
+      }
+    ]
   },
   contact: {
     badge: "GET IN TOUCH",
     title: "Let's Build Something Great",
     subtitle: "I'm open to remote engineering roles, technical challenges, and product collaborations. Feel free to reach out directly.",
     nameLabel: "Your Name",
+    namePlaceholder: "Ada Lovelace",
     emailLabel: "Your Email",
+    emailPlaceholder: "ada@domain.com",
     subjectLabel: "Subject / Topic",
     messageLabel: "Your Message",
+    messagePlaceholder: "Describe your engineering requirements or opportunity...",
     sendButton: "Send Message",
     directEmail: "Direct Email",
     location: "Location",
     locationValue: "Nigeria (Remote / Global)",
     subjectOptions: {
-      role: "Engineering Opportunity / Hiring",
+      role: "Engineering Opportunity / Hiring Inquiry",
       project: "Software Project / Contract",
       collaboration: "Technical Collaboration",
       other: "General Inquiry"
     },
     mailtoNotice: "Clicking send opens your email client directly addressed to Matthew Gana."
   },
+  aiml: {
+    badge: "AI / ML ENGINEERING",
+    title: "Applied AI / ML Engineering",
+    subtitle: "Applied AI systems spanning predictive modelling, computer vision, NLP, geospatial intelligence, anomaly detection, and intelligent decision support.",
+    nav: "AI / ML",
+    disciplinesLabel: "Core Disciplines",
+    projectsLabel: "Applied Projects",
+    statusLabel: "Status",
+    domainLabel: "Domain",
+    capabilitiesLabel: "Capabilities",
+    evidenceLabel: "Engineering Evidence",
+    workflowBadge: "ENGINEERING PIPELINE",
+    workflowTitle: "Applied AI Engineering Workflow",
+    workflowSubtitle: "A general-purpose engineering approach applied across AI/ML projects. Individual project stages vary based on actual implementation scope.",
+    workflowDisclaimer: "This represents a general engineering workflow, not a claim that all stages have been completed across every project.",
+    capstoneBadge: "AI / ML CAPSTONE",
+    capstoneLabel: "Capstone",
+    capstoneNote: "AI & Machine Learning course capstone — recently completed.",
+    disciplines: {
+      predictive: "Predictive ML",
+      vision: "Computer Vision",
+      nlp: "NLP",
+      geospatial: "Geospatial AI",
+      anomaly: "Anomaly Detection",
+      decision: "Decision Support"
+    },
+    phases: {
+      input: "Input",
+      preparation: "Preparation",
+      modelling: "Modelling",
+      deployment: "Deployment",
+      iteration: "Iteration"
+    }
+  },
+  credentials: {
+    badge: "CREDENTIALS",
+    title: "Credentials",
+    subtitle: "Formal training supporting the engineering work.",
+    nav: "Credentials",
+    categoryLabel: "Category",
+    viewCertificate: "View Certificate",
+    noImageNote: "Certificate on file",
+    categories: {
+      cybersecurity: "Cybersecurity",
+      backend: "Backend Development",
+      data: "Data Analytics",
+      aiml: "AI & Machine Learning"
+    }
+  },
   footer: {
+    brandTitle: "Full-Stack Software Engineer",
     tagline: "Building secure, scalable, and intelligent software systems.",
     rights: "All rights reserved.",
     backToTop: "Back to top"

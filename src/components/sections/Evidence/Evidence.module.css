@@ -1,5 +1,5 @@
 .evidence {
-  padding: 6.5rem 1.5rem;
+  padding: 4.5rem 1.5rem;
   background: 
     radial-gradient(ellipse at 80% 80%, rgba(45, 106, 79, 0.25) 0%, transparent 60%),
     radial-gradient(circle at 20% 20%, rgba(224, 109, 40, 0.15) 0%, transparent 50%),
@@ -20,16 +20,10 @@
 .headerRow {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 4rem;
-}
-
-@media (min-width: 900px) {
-  .headerRow {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-  }
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
 }
 
 .headerContent {
@@ -39,6 +33,7 @@
 .eyebrowGroup {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
@@ -87,6 +82,7 @@
   cursor: pointer;
   transition: all var(--transition-normal);
   white-space: nowrap;
+  margin-top: 1.25rem;
 }
 
 .detailsCta:hover {

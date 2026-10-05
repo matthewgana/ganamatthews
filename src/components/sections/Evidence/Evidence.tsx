@@ -26,40 +26,46 @@ export const Evidence: React.FC = () => {
             <p className={styles.subtitle}>
               {t.evidence.subtitle}
             </p>
-          </div>
 
-          <a href="#engineering-approach" className={styles.detailsCta}>
-            <span>{t.evidence.cta}</span>
-            <ArrowUpRight size={16} />
-          </a>
+            <a href="#engineering-approach" className={styles.detailsCta}>
+              <span>{t.evidence.cta}</span>
+              <ArrowUpRight size={16} data-rtl-mirror="true" />
+            </a>
+          </div>
         </div>
 
         {/* 8 Verifiable Metrics Grid */}
         <div className={styles.metricsGrid}>
-          {EVIDENCE_METRICS.map((metric) => (
-            <div key={metric.id} className={styles.card || styles.metricCard}>
-              <div className={styles.metricValueRow}>
-                <span className={styles.metricValue}>
-                  {metric.value.includes("/") ? (
-                    <>
-                      <span className={styles.metricHighlight}>{metric.value.split("/")[0]}</span>
-                      <span style={{ fontSize: "0.75em", color: "#82a895" }}>/{metric.value.split("/")[1]}</span>
-                    </>
-                  ) : metric.value.endsWith("+") ? (
-                    <>
-                      <span className={styles.metricHighlight}>{metric.value.replace("+", "")}</span>
-                      <span className={styles.metricHighlight}>+</span>
-                    </>
-                  ) : (
-                    <span className={styles.metricHighlight}>{metric.value}</span>
-                  )}
-                </span>
-              </div>
+          {EVIDENCE_METRICS.map((metric) => {
+            const localized = t.evidence.metrics?.[metric.id as keyof typeof t.evidence.metrics];
+            const label = localized?.label || metric.label;
+            const detail = localized?.detail || metric.detail;
 
-              <div className={styles.metricLabel}>{metric.label}</div>
-              <p className={styles.metricDetail}>{metric.detail}</p>
-            </div>
-          ))}
+            return (
+              <div key={metric.id} className={styles.card || styles.metricCard}>
+                <div className={styles.metricValueRow}>
+                  <span className={styles.metricValue}>
+                    {metric.value.includes("/") ? (
+                      <>
+                        <span className={styles.metricHighlight}>{metric.value.split("/")[0]}</span>
+                        <span style={{ fontSize: "0.75em", color: "#82a895" }}>/{metric.value.split("/")[1]}</span>
+                      </>
+                    ) : metric.value.endsWith("+") ? (
+                      <>
+                        <span className={styles.metricHighlight}>{metric.value.replace("+", "")}</span>
+                        <span className={styles.metricHighlight}>+</span>
+                      </>
+                    ) : (
+                      <span className={styles.metricHighlight}>{metric.value}</span>
+                    )}
+                  </span>
+                </div>
+
+                <div className={styles.metricLabel}>{label}</div>
+                <p className={styles.metricDetail}>{detail}</p>
+              </div>
+            );
+          })}
         </div>
 
         {/* Audit Evidence Note */}

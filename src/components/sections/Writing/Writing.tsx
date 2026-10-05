@@ -48,7 +48,7 @@ export const Writing: React.FC = () => {
         </div>
 
         <div className={styles.grid}>
-          {ARTICLES.map((article, i) => (
+          {(t.writing.articles || ARTICLES).map((article, i) => (
             <article key={i} className={styles.card}>
               <div>
                 <span className={styles.cardCategory}>{article.category}</span>
@@ -58,7 +58,7 @@ export const Writing: React.FC = () => {
 
               <div className={styles.cardStatus}>
                 <span className={styles.statusDot} />
-                <span>{article.status}</span>
+                <span>{t.writing.upcomingNote}</span>
               </div>
             </article>
           ))}

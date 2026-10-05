@@ -46,7 +46,15 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         <div className={styles.modalHeader}>
           <div className={styles.badgeRow}>
             <span className={styles.industryTag}>{project.industry}</span>
-            <span className={styles.maturityBadge}>{project.maturity}</span>
+            <span className={styles.maturityBadge}>
+              {t.projects.maturities[
+                project.maturity === "Functional MVP"
+                  ? "mvp"
+                  : project.maturity === "Working Prototype"
+                  ? "working"
+                  : "early"
+              ] || project.maturity}
+            </span>
           </div>
           <h2 className={styles.modalTitle}>{project.title}</h2>
           <p className={styles.modalSubtitle}>{project.subtitle}</p>
@@ -54,12 +62,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
         {/* Problem & Solution */}
         <div className={styles.sectionBlock}>
-          <span className={styles.blockHeading}>Operational Problem</span>
+          <span className={styles.blockHeading}>{t.projects.operationalProblem}</span>
           <p className={styles.blockText}>{project.problem}</p>
         </div>
 
         <div className={styles.sectionBlock}>
-          <span className={styles.blockHeading}>Engineering Solution</span>
+          <span className={styles.blockHeading}>{t.projects.engineeringSolution}</span>
           <p className={styles.blockText}>{project.solution}</p>
         </div>
 
@@ -114,7 +122,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         {/* Modal Footer */}
         <div className={styles.modalFooter}>
           <span style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
-            Repository Audit Source: Verified Workspace Evidence
+            {t.projects.auditSource}
           </span>
 
           {project.githubUrl && (
@@ -125,8 +133,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               className={styles.repoLink}
             >
               <Github size={16} />
-              <span>Inspect on GitHub</span>
-              <ArrowUpRight size={14} />
+              <span>{t.projects.inspectGithub}</span>
+              <ArrowUpRight size={14} data-rtl-mirror="true" />
             </a>
           )}
         </div>

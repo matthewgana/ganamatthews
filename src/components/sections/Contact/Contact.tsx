@@ -14,21 +14,16 @@ export const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subjectMap: Record<string, string> = {
-      role: "Engineering Opportunity / Hiring Inquiry",
-      project: "Software Project Inquiry",
-      collaboration: "Technical Collaboration",
-      other: "General Engineering Inquiry"
-    };
+    const subjectTitle = t.contact.subjectOptions[subject as keyof typeof t.contact.subjectOptions] || subject;
 
     const mailSubject = encodeURIComponent(
-      `[Portfolio Contact] ${subjectMap[subject] || "Inquiry"} from ${name}`
+      `[Portfolio Contact] ${subjectTitle} from ${name}`
     );
     const mailBody = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nTopic: ${subjectMap[subject]}\n\nMessage:\n${message}`
+      `Name: ${name}\nEmail: ${email}\nTopic: ${subjectTitle}\n\nMessage:\n${message}`
     );
 
-    window.location.href = `mailto:matthewgana.dev@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+    window.location.href = `mailto:matthewgana95@gmail.com?subject=${mailSubject}&body=${mailBody}`;
   };
 
   return (
@@ -53,88 +48,92 @@ export const Contact: React.FC = () => {
             </div>
 
             <div className={styles.detailsList}>
-              <a
-                href="mailto:matthewgana.dev@gmail.com"
-                className={styles.detailRow}
-                aria-label="Send direct email"
-              >
-                <div className={styles.detailIcon}>
-                  <Mail size={20} />
-                </div>
-                <div className={styles.detailText}>matthewgana.dev@gmail.com</div>
-              </a>
+              <div className={styles.primaryDetails}>
+                <a
+                  href="mailto:matthewgana95@gmail.com"
+                  className={styles.detailCard}
+                  aria-label={t.contact.directEmail}
+                >
+                  <div className={styles.detailIcon}>
+                    <Mail size={20} />
+                  </div>
+                  <div className={styles.detailInfo}>
+                    <span className={styles.detailLabel}>{t.contact.directEmail}</span>
+                    <span className={styles.detailValue}>matthewgana95@gmail.com</span>
+                  </div>
+                </a>
 
-              <div className={styles.detailRow}>
-                <div className={styles.detailIcon}>
-                  <MapPin size={20} />
+                <div className={styles.detailCard}>
+                  <div className={styles.detailIcon}>
+                    <MapPin size={20} />
+                  </div>
+                  <div className={styles.detailInfo}>
+                    <span className={styles.detailLabel}>{t.contact.location}</span>
+                    <span className={styles.detailValue}>{t.contact.locationValue}</span>
+                  </div>
                 </div>
-                <div className={styles.detailText}>Nigeria (Remote / Global)</div>
               </div>
 
-              <a
-                href="https://github.com/matthewgana"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.detailRow}
-                aria-label="GitHub profile"
-              >
-                <div className={styles.detailIcon}>
-                  <Github size={20} />
-                </div>
-                <div className={styles.detailText}>github.com/matthewgana</div>
-              </a>
+              {/* Professional & Social Channels */}
+              <div className={styles.socialGroup}>
+                <span className={styles.socialGroupTitle}>Connect & Follow</span>
+                <div className={styles.socialPillsGrid}>
+                  <a
+                    href="https://www.linkedin.com/in/matthewsgana"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.socialPill}
+                    aria-label={t.nav.linkedin}
+                  >
+                    <span className={styles.socialIconWrap}><Linkedin size={17} /></span>
+                    <span>LinkedIn</span>
+                  </a>
 
-              <a
-                href="https://www.linkedin.com/in/matthewsgana"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.detailRow}
-                aria-label="LinkedIn profile"
-              >
-                <div className={styles.detailIcon}>
-                  <Linkedin size={20} />
-                </div>
-                <div className={styles.detailText}>linkedin.com/in/matthewsgana</div>
-              </a>
+                  <a
+                    href="https://github.com/matthewgana"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.socialPill}
+                    aria-label={t.nav.github}
+                  >
+                    <span className={styles.socialIconWrap}><Github size={17} /></span>
+                    <span>GitHub</span>
+                  </a>
 
-              <a
-                href="https://www.youtube.com/@LearnWithMatthewGana"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.detailRow}
-                aria-label="YouTube channel"
-              >
-                <div className={styles.detailIcon}>
-                  <Youtube size={20} />
-                </div>
-                <div className={styles.detailText}>youtube.com/@LearnWithMatthewGana</div>
-              </a>
+                  <a
+                    href="https://www.youtube.com/@LearnWithMatthewGana"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.socialPill}
+                    aria-label="YouTube: Learn With Matthew Gana"
+                  >
+                    <span className={styles.socialIconWrap}><Youtube size={17} /></span>
+                    <span>YouTube</span>
+                  </a>
 
-              <a
-                href="https://www.instagram.com/learnwithmatthewgana?igsh=MTZndGNrYndrM3U0Nw=="
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.detailRow}
-                aria-label="Instagram profile"
-              >
-                <div className={styles.detailIcon}>
-                  <Instagram size={20} />
-                </div>
-                <div className={styles.detailText}>instagram.com/learnwithmatthewgana</div>
-              </a>
+                  <a
+                    href="https://www.instagram.com/learnwithmatthewgana?igsh=MTZndGNrYndrM3U0Nw=="
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.socialPill}
+                    aria-label="Instagram: @learnwithmatthewgana"
+                  >
+                    <span className={styles.socialIconWrap}><Instagram size={17} /></span>
+                    <span>Instagram</span>
+                  </a>
 
-              <a
-                href="https://www.facebook.com/share/1BxAFDC66L/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.detailRow}
-                aria-label="Facebook profile"
-              >
-                <div className={styles.detailIcon}>
-                  <Facebook size={20} />
+                  <a
+                    href="https://www.facebook.com/share/1BxAFDC66L/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.socialPill}
+                    aria-label="Facebook: Matthew Gana"
+                  >
+                    <span className={styles.socialIconWrap}><Facebook size={17} /></span>
+                    <span>Facebook</span>
+                  </a>
                 </div>
-                <div className={styles.detailText}>facebook.com/share/1BxAFDC66L</div>
-              </a>
+              </div>
             </div>
           </div>
 
@@ -151,7 +150,7 @@ export const Contact: React.FC = () => {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Ada Lovelace"
+                  placeholder={t.contact.namePlaceholder}
                   className={styles.input}
                 />
               </div>
@@ -166,7 +165,7 @@ export const Contact: React.FC = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="ada@domain.com"
+                  placeholder={t.contact.emailPlaceholder}
                   className={styles.input}
                 />
               </div>
@@ -199,14 +198,14 @@ export const Contact: React.FC = () => {
                 rows={4}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Describe your engineering requirements or opportunity..."
+                placeholder={t.contact.messagePlaceholder}
                 className={styles.textarea}
               />
             </div>
 
             <button type="submit" className={styles.submitButton}>
               <span>{t.contact.sendButton}</span>
-              <Send size={16} />
+              <Send size={16} data-rtl-mirror="true" />
             </button>
 
             <p className={styles.formNotice}>

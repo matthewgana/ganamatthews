@@ -1,5 +1,5 @@
 .approach {
-  padding: 7rem 1.5rem;
+  padding: 4.5rem 1.5rem;
   background-color: var(--bg-primary);
   position: relative;
   border-top: 1px solid var(--border-subtle);
@@ -12,12 +12,14 @@
 
 .header {
   max-width: 760px;
-  margin-bottom: 4rem;
+  margin: 0 auto 3rem;
+  text-align: center;
 }
 
 .eyebrowGroup {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
@@ -49,6 +51,77 @@
   font-size: 1.05rem;
   color: var(--text-secondary);
   line-height: 1.65;
+}
+
+/* ── PIPELINE TICKER ─────────────────────────────────────── */
+.tickerOuter {
+  overflow: hidden;
+  width: 100%;
+  margin: 0 0 2.5rem;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+}
+
+.tickerTrack {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: max-content;
+  animation: pipelineTicker 32s linear infinite;
+}
+
+.tickerOuter:hover .tickerTrack {
+  animation-play-state: paused;
+}
+
+@keyframes pipelineTicker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.tickerItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  white-space: nowrap;
+  margin-right: 0.6rem;
+  flex-shrink: 0;
+}
+
+.tickerStep {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--accent-text);
+  letter-spacing: 0.04em;
+}
+
+.tickerLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tickerArrow {
+  color: var(--accent-primary);
+  margin-left: 0.5rem;
+  flex-shrink: 0;
 }
 
 /* Interactive Flow Layout */

@@ -324,8 +324,8 @@ export const Technologies: FC = () => {
               onClick={scrollToTopology}
               className={styles.ctaToggle}
             >
-              <span>Explore Interactive Topology</span>
-              <ArrowRight size={16} />
+              <span>{t.tech.viewAll}</span>
+              <ArrowRight size={16} data-rtl-mirror="true" />
             </button>
           </div>
 
@@ -398,7 +398,7 @@ export const Technologies: FC = () => {
               <div className={styles.codeLine}>
                 <span className={styles.lineNumber}>09</span>
                 <span className={styles.lineContent}>
-                  <span className={styles.tokenComment}>// Build. Ship. Improve.</span>
+                  <span className={styles.tokenComment}>{t.tech.codeComment}</span>
                 </span>
               </div>
             </div>
@@ -410,42 +410,42 @@ export const Technologies: FC = () => {
           <div className={styles.categoryCard}>
             <div className={styles.categoryHeader}>
               <Server size={17} className={styles.categoryIcon} />
-              <span>Backend</span>
+              <span>{t.tech.categories.backend}</span>
             </div>
             <span className={styles.categoryStack}>NestJS, Node.js, Python</span>
           </div>
           <div className={styles.categoryCard}>
             <div className={styles.categoryHeader}>
               <Layout size={17} className={styles.categoryIcon} />
-              <span>Frontend</span>
+              <span>{t.tech.categories.frontend}</span>
             </div>
             <span className={styles.categoryStack}>Next.js, React, RN</span>
           </div>
           <div className={styles.categoryCard}>
             <div className={styles.categoryHeader}>
               <Database size={17} className={styles.categoryIcon} />
-              <span>Database</span>
+              <span>{t.tech.categories.database}</span>
             </div>
             <span className={styles.categoryStack}>PostgreSQL, MongoDB</span>
           </div>
           <div className={styles.categoryCard}>
             <div className={styles.categoryHeader}>
               <Cpu size={17} className={styles.categoryIcon} />
-              <span>AI/ML</span>
+              <span>{t.tech.categories.ai}</span>
             </div>
             <span className={styles.categoryStack}>OpenAI, PyTorch, BKT</span>
           </div>
           <div className={styles.categoryCard}>
             <div className={styles.categoryHeader}>
               <Wrench size={17} className={styles.categoryIcon} />
-              <span>DevOps</span>
+              <span>{t.tech.categories.infra}</span>
             </div>
             <span className={styles.categoryStack}>Docker, BullMQ, Actions</span>
           </div>
           <div className={styles.categoryCard}>
             <div className={styles.categoryHeader}>
               <ShieldCheck size={17} className={styles.categoryIcon} />
-              <span>Security</span>
+              <span>{t.tech.categories.security}</span>
             </div>
             <span className={styles.categoryStack}>JWT, RBAC, Helmet</span>
           </div>
@@ -456,12 +456,12 @@ export const Technologies: FC = () => {
           <div className={styles.topologyHeader}>
             <div className={styles.eyebrowGroup} style={{ justifyContent: "center" }}>
               <span className={styles.eyebrowDash} />
-              <span className={styles.badge}>SYSTEM TOPOLOGY NETWORK</span>
+              <span className={styles.badge}>{t.tech.topologyBadge}</span>
               <span className={styles.eyebrowDash} />
             </div>
-            <h3 className={styles.topologyTitle}>Architectural Dependency Mesh</h3>
+            <h3 className={styles.topologyTitle}>{t.tech.topologyTitle}</h3>
             <p className={styles.topologyDesc}>
-              Hover or focus on any architectural node to inspect runtime specifications, portfolio adoption ratios, and engineering responsibilities.
+              {t.tech.topologyDesc}
             </p>
           </div>
 
@@ -525,7 +525,7 @@ export const Technologies: FC = () => {
                 <div className={styles.hudHeader}>
                   <div className={styles.hudStatusDot} />
                   <span className={styles.hudStatusText}>
-                    {activeTech ? "TELEMETRY: NODE INSPECTION ACTIVE" : "TOPOLOGY TELEMETRY READY"}
+                    {activeTech ? t.tech.telemetryActive : t.tech.telemetryReady}
                   </span>
                   <span className={styles.hudTerminalTitle}>system.log</span>
                 </div>
@@ -547,20 +547,20 @@ export const Technologies: FC = () => {
 
                       <div className={styles.hudMetricsGrid}>
                         <div className={styles.hudMetricItem}>
-                          <span className={styles.hudMetricKey}>Portfolio Usage</span>
+                          <span className={styles.hudMetricKey}>{t.tech.portfolioUsage}</span>
                           <span className={styles.hudMetricVal}>{activeTech.portfolioAdoption}</span>
                         </div>
                         <div className={styles.hudMetricItem}>
-                          <span className={styles.hudMetricKey}>Runtime Engine</span>
+                          <span className={styles.hudMetricKey}>{t.tech.runtimeEngine}</span>
                           <span className={styles.hudMetricVal}>{activeTech.runtime.split("/")[0]}</span>
                         </div>
                       </div>
                     </div>
                   ) : (
                     <div className={styles.hudContent}>
-                      <h4 className={styles.hudTechNameReady}>MISSION CONTROL READY</h4>
+                      <h4 className={styles.hudTechNameReady}>{t.tech.missionControlTitle}</h4>
                       <p className={styles.hudTechDescReady}>
-                        Select or hover over any node in the left or right columns to inspect runtime specifications, portfolio adoption ratios, and architectural roles.
+                        {t.tech.missionControlDesc}
                       </p>
                     </div>
                   )}
@@ -583,14 +583,21 @@ export const Technologies: FC = () => {
           </div>
         </div>
 
-        {/* Footer Tags */}
-        <footer className={styles.footer}>
-          {TECHNOLOGIES.map((tech) => (
-            <span key={tech.id} className={styles.footerTag}>
-              {tech.name}
-            </span>
-          ))}
-        </footer>
+        {/* Footer Tags — Infinite Marquee Ticker */}
+        <div className={styles.tickerOuter} aria-label="Core technologies list">
+          <div className={styles.tickerTrack}>
+            {TECHNOLOGIES.map((tech) => (
+              <span key={`primary-${tech.id}`} className={styles.footerTag}>
+                {tech.name}
+              </span>
+            ))}
+            {TECHNOLOGIES.map((tech) => (
+              <span key={`clone-${tech.id}`} className={styles.footerTag} aria-hidden="true">
+                {tech.name}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

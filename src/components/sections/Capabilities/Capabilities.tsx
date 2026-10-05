@@ -37,31 +37,37 @@ export const Capabilities: React.FC = () => {
         </div>
 
         <div className={styles.grid}>
-          {CAPABILITIES.map((cap) => (
-            <div key={cap.id} className={styles.card}>
-              <div className={styles.cardHeader}>
-                <div className={styles.iconWrapper}>
-                  {ICONS_MAP[cap.icon] || <Code2 size={24} />}
+          {CAPABILITIES.map((cap) => {
+            const itemTrans = t.capabilities.items[cap.id as keyof typeof t.capabilities.items];
+            const title = itemTrans?.title || cap.title;
+            const desc = itemTrans?.desc || cap.description;
+
+            return (
+              <div key={cap.id} className={styles.card}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.iconWrapper}>
+                    {ICONS_MAP[cap.icon] || <Code2 size={24} />}
+                  </div>
+                  <span className={styles.number}>{cap.number}</span>
                 </div>
-                <span className={styles.number}>{cap.number}</span>
-              </div>
 
-              <div>
-                <h3 className={styles.cardTitle}>{cap.title}</h3>
-                <p className={styles.cardDesc} style={{ marginTop: "0.5rem" }}>
-                  {cap.description}
-                </p>
-              </div>
+                <div>
+                  <h3 className={styles.cardTitle}>{title}</h3>
+                  <p className={styles.cardDesc} style={{ marginTop: "0.5rem" }}>
+                    {desc}
+                  </p>
+                </div>
 
-              <div className={styles.skillsList}>
-                {cap.keySkills.map((skill) => (
-                  <span key={skill} className={styles.skillPill}>
-                    {skill}
-                  </span>
-                ))}
+                <div className={styles.skillsList}>
+                  {cap.keySkills.map((skill) => (
+                    <span key={skill} className={styles.skillPill}>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

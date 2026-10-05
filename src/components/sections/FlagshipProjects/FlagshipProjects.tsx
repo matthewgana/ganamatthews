@@ -36,12 +36,11 @@ export const FlagshipProjects: React.FC = () => {
               {t.projects.title}
             </h2>
             <p className={styles.subtitle}>{t.projects.subtitle}</p>
+            <a href="#other-projects" className={styles.viewAllLink}>
+              <span>{t.projects.viewAll}</span>
+              <ArrowRight size={16} data-rtl-mirror="true" />
+            </a>
           </div>
-
-          <a href="#other-projects" className={styles.viewAllLink}>
-            <span>{t.projects.viewAll}</span>
-            <ArrowRight size={16} />
-          </a>
         </div>
 
         {/* 2x2 Flagships Grid */}
@@ -71,7 +70,15 @@ export const FlagshipProjects: React.FC = () => {
 
                   <div className={styles.maturityBadge}>
                     <span className={styles.maturityDot} />
-                    <span>{project.maturity}</span>
+                    <span>
+                      {t.projects.maturities[
+                        project.maturity === "Functional MVP"
+                          ? "mvp"
+                          : project.maturity === "Working Prototype"
+                          ? "working"
+                          : "early"
+                      ] || project.maturity}
+                    </span>
                   </div>
 
                   <p className={styles.cardDescription}>{project.shortDescription}</p>
@@ -90,10 +97,10 @@ export const FlagshipProjects: React.FC = () => {
                     type="button"
                     onClick={() => setSelectedProject(project)}
                     className={styles.detailsButton}
-                    aria-label={`View full technical audit details for ${project.title}`}
+                    aria-label={`${t.projects.viewAuditFor} ${project.title}`}
                   >
                     <span>{t.projects.viewDetails}</span>
-                    <ArrowRight size={15} />
+                    <ArrowRight size={14} data-rtl-mirror="true" />
                   </button>
                 </div>
               </div>

@@ -130,7 +130,7 @@
   padding: 1.75rem;
   background: var(--bg-card);
   border: 1px solid var(--border-medium);
-  border-left: 4px solid var(--color-forest-400);
+  border-inline-start: 4px solid var(--color-forest-400);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   display: flex;
@@ -139,7 +139,7 @@
 }
 
 :global([data-theme="light"]) .stemCard {
-  border-left-color: var(--color-forest-600);
+  border-inline-start-color: var(--color-forest-600);
 }
 
 .stemHeader {

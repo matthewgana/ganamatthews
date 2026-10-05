@@ -50,10 +50,10 @@ export const Hero: React.FC = () => {
           </div>
 
           <h1 className={styles.title}>
-            Full-Stack{" "}
-            <span className={styles.titleHighlight}>Software</span>
+            {t.hero.titleFullStack}{" "}
+            <span className={styles.titleHighlight}>{t.hero.titleSoftware}</span>
             <br />
-            Engineer
+            {t.hero.titleEngineer}
           </h1>
 
           <p className={styles.subtitle}>
@@ -62,22 +62,19 @@ export const Hero: React.FC = () => {
 
           {/* Specialties Rail */}
           <div className={styles.specialties}>
-            <span>Backend</span>
-            <span className={styles.specialtyDot}>•</span>
-            <span>SaaS</span>
-            <span className={styles.specialtyDot}>•</span>
-            <span>Architecture</span>
-            <span className={styles.specialtyDot}>•</span>
-            <span>AI/ML</span>
-            <span className={styles.specialtyDot}>•</span>
-            <span>Security</span>
+            {t.hero.specialtiesList.map((item, index) => (
+              <React.Fragment key={item}>
+                {index > 0 && <span className={styles.specialtyDot}>•</span>}
+                <span>{item}</span>
+              </React.Fragment>
+            ))}
           </div>
 
           {/* CTAs */}
           <div className={styles.ctaRow}>
             <a href="#work" className={styles.primaryCta}>
               <span>{t.hero.ctaPrimary}</span>
-              <ArrowRight size={18} />
+              <ArrowRight size={18} data-rtl-mirror="true" />
             </a>
             <a href="#contact" className={styles.secondaryCta}>
               <span>{t.hero.ctaSecondary}</span>
@@ -91,30 +88,30 @@ export const Hero: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialLink}
-              aria-label="GitHub Profile"
+              aria-label={t.nav.github}
             >
               <Github size={18} />
-              <span>GitHub</span>
+              <span>{t.nav.github}</span>
             </a>
             <a
               href="https://www.linkedin.com/in/matthewsgana"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialLink}
-              aria-label="LinkedIn Profile"
+              aria-label={t.nav.linkedin}
             >
               <Linkedin size={18} />
-              <span>LinkedIn</span>
+              <span>{t.nav.linkedin}</span>
             </a>
             <a
               href="/gmatts-cv.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialLink}
-              aria-label="View Resume PDF"
+              aria-label={`${t.nav.resume} (PDF)`}
             >
               <FileText size={18} />
-              <span>Resume</span>
+              <span>{t.nav.resume}</span>
             </a>
           </div>
         </div>
@@ -134,7 +131,7 @@ export const Hero: React.FC = () => {
 
             {/* Handwritten Script Callout (as in the mockup) */}
             <div className={styles.handwrittenScript}>
-              &quot;Better Systems, Greater Impact&quot;
+              &quot;{t.hero.handwritten}&quot;
             </div>
 
             {/* Vertical Evidence Rail (01 to 11) */}
@@ -156,7 +153,7 @@ export const Hero: React.FC = () => {
             {/* Floating Status Indicator */}
             <div className={styles.floatingStatusStrip}>
               <span className={styles.statusLiveDot} />
-              <span>11 Systems Audited & Verified</span>
+              <span>{t.hero.verifiedSystems}</span>
             </div>
           </div>
         </div>

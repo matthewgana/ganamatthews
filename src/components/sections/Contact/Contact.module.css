@@ -70,29 +70,42 @@
 .detailsList {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  margin-top: 1rem;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
-.detailRow {
+.primaryDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.detailCard {
   display: flex;
   align-items: center;
   gap: 1rem;
+  padding: 0.85rem 1.15rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
   color: var(--text-primary);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
 }
 
-.detailRow:hover {
-  color: var(--accent-primary);
+.detailCard:hover {
+  border-color: var(--accent-subtle-border);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .detailIcon {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-md);
-  background: var(--bg-card);
-  border: 1px solid var(--border-medium);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,14 +114,81 @@
   transition: all var(--transition-fast);
 }
 
-.detailRow:hover .detailIcon {
-  border-color: var(--accent-primary);
+.detailCard:hover .detailIcon {
   background: var(--accent-subtle);
+  border-color: var(--accent-primary);
 }
 
-.detailText {
+.detailInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.detailLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.detailValue {
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Social & Professional Presence */
+.socialGroup {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.socialGroupTitle {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.socialPillsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.socialPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 0.95rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.825rem;
+  font-weight: 700;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.socialPill:hover {
+  background: var(--accent-subtle);
+  border-color: var(--accent-subtle-border);
+  color: var(--accent-text);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.socialIconWrap {
+  display: flex;
+  align-items: center;
+  color: var(--accent-primary);
 }
 
 /* Form Side */

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Globe, MapPin, GraduationCap, ArrowRight } from "lucide-react";
+import { Globe, MapPin, Compass, GraduationCap, ArrowRight } from "lucide-react";
 import { useTranslation } from "@/providers/IntlProvider";
 import styles from "./About.module.css";
 
@@ -43,7 +43,7 @@ export const About: React.FC = () => {
               {t.about.p2}
             </p>
 
-            {/* Badges: Remote & Location */}
+            {/* Badges: Remote, Location & International Mobility */}
             <div className={styles.badgesRow}>
               <div className={styles.metaBadge}>
                 <Globe size={22} className={styles.metaIcon} />
@@ -58,6 +58,14 @@ export const About: React.FC = () => {
                 <div className={styles.metaTextGroup}>
                   <span className={styles.metaLabel}>{t.about.basedIn}</span>
                   <span className={styles.metaValue}>{t.about.basedDesc}</span>
+                </div>
+              </div>
+
+              <div className={styles.metaBadge}>
+                <Compass size={22} className={styles.metaIcon} />
+                <div className={styles.metaTextGroup}>
+                  <span className={styles.metaLabel}>{t.about.mobilityTitle}</span>
+                  <span className={styles.metaValue}>{t.about.mobilityDesc}</span>
                 </div>
               </div>
             </div>
@@ -77,20 +85,20 @@ export const About: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.stemLink}
-                  aria-label="YouTube Channel: Learn With Matthew Gana"
+                  aria-label={t.about.youtubeChannel}
                 >
                   <span>YouTube: @LearnWithMatthewGana</span>
-                  <ArrowRight size={14} />
+                  <ArrowRight size={14} data-rtl-mirror="true" />
                 </a>
                 <a
                   href="https://www.instagram.com/learnwithmatthewgana?igsh=MTZndGNrYndrM3U0Nw=="
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.stemLink}
-                  aria-label="Instagram: Learn With Matthew Gana"
+                  aria-label={t.about.instagramProfile}
                 >
                   <span>Instagram: @learnwithmatthewgana</span>
-                  <ArrowRight size={14} />
+                  <ArrowRight size={14} data-rtl-mirror="true" />
                 </a>
               </div>
             </div>

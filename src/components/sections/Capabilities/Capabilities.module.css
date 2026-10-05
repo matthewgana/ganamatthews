@@ -1,5 +1,5 @@
 .capabilities {
-  padding: 6.5rem 1.5rem;
+  padding: 4.5rem 1.5rem;
   background-color: var(--bg-primary);
   position: relative;
   border-top: 1px solid var(--border-subtle);
@@ -12,12 +12,14 @@
 
 .header {
   max-width: 720px;
-  margin-bottom: 3.5rem;
+  margin: 0 auto 3rem;
+  text-align: center;
 }
 
 .eyebrowGroup {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
 }

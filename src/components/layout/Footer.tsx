@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
             <div className={styles.monogram}>MG</div>
             <div className={styles.brandText}>
               <span className={styles.brandName}>Matthew Gana</span>
-              <span className={styles.brandTitle}>Full-Stack Software Engineer</span>
+              <span className={styles.brandTitle}>{t.footer.brandTitle}</span>
             </div>
           </div>
 
@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialIcon}
-              aria-label="GitHub profile"
+              aria-label={t.nav.github}
             >
               <Github size={18} />
             </a>
@@ -53,7 +53,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialIcon}
-              aria-label="LinkedIn profile"
+              aria-label={t.nav.linkedin}
             >
               <Linkedin size={18} />
             </a>
@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialIcon}
-              aria-label="YouTube channel"
+              aria-label="YouTube: @LearnWithMatthewGana"
             >
               <Youtube size={18} />
             </a>
@@ -71,7 +71,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialIcon}
-              aria-label="Instagram profile"
+              aria-label="Instagram: @learnwithmatthewgana"
             >
               <Instagram size={18} />
             </a>
@@ -80,14 +80,14 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialIcon}
-              aria-label="Facebook profile"
+              aria-label="Facebook: Matthew Gana"
             >
               <Facebook size={18} />
             </a>
             <a
-              href="mailto:matthewgana.dev@gmail.com"
+              href="mailto:matthewgana95@gmail.com"
               className={styles.socialIcon}
-              aria-label="Direct email"
+              aria-label={t.contact.directEmail}
             >
               <Mail size={18} />
             </a>

@@ -31,6 +31,19 @@ export const Approach: React.FC = () => {
           </p>
         </div>
 
+        {/* ── Infinite Pipeline Ticker ── */}
+        <div className={styles.tickerOuter} aria-hidden="true">
+          <div className={styles.tickerTrack}>
+            {[...APPROACH_STEPS, ...APPROACH_STEPS].map((step, i) => (
+              <div key={`${step.step}-${i}`} className={styles.tickerItem}>
+                <span className={styles.tickerStep}>{step.step}</span>
+                <span className={styles.tickerLabel}>{step.title}</span>
+                <ArrowRight size={14} className={styles.tickerArrow} data-rtl-mirror="true" />
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className={styles.flowLayout}>
           {/* Left Column: 11 Sequential Pipeline Steps */}
           <div className={styles.stepsPipeline} role="tablist" aria-label="Engineering methodology pipeline">
@@ -50,7 +63,7 @@ export const Approach: React.FC = () => {
                   <span className={styles.stepTitle}>{step.title}</span>
                   <span className={styles.stepSubtitle}>{step.subtitle.split("&")[0]}</span>
                 </div>
-                <ArrowRight size={16} className={styles.stepArrow} />
+                <ArrowRight size={16} className={styles.stepArrow} data-rtl-mirror="true" />
               </button>
             ))}
           </div>
@@ -60,7 +73,7 @@ export const Approach: React.FC = () => {
             <div className={styles.inspectorHeader}>
               <div className={styles.inspectorBadge}>
                 <Workflow size={15} />
-                <span>Phase {activeStep.step} of 11 • Architectural Specification</span>
+                <span>{t.approach.phaseSpecification.replace("{step}", activeStep.step)}</span>
               </div>
               <h3 className={styles.inspectorTitle}>{activeStep.title}</h3>
               <span className={styles.inspectorSubtitle}>{activeStep.subtitle}</span>
@@ -72,7 +85,7 @@ export const Approach: React.FC = () => {
 
             {/* Core Activities & Engineering Practices */}
             <div className={styles.activitiesSection}>
-              <span className={styles.sectionLabel}>Core Engineering Activities & Mechanisms</span>
+              <span className={styles.sectionLabel}>{t.approach.activitiesHeading}</span>
               <ul className={styles.activitiesList}>
                 {activeStep.coreActivities.map((activity, i) => (
                   <li key={i} className={styles.activityItem}>
@@ -87,7 +100,7 @@ export const Approach: React.FC = () => {
             <div className={styles.deliverableBox}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
                 <FileCode size={15} color="var(--accent-primary)" />
-                <span className={styles.deliverableHeading}>Concrete Architectural Deliverable</span>
+                <span className={styles.deliverableHeading}>{t.approach.deliverableHeading}</span>
               </div>
               <p className={styles.deliverableContent}>{activeStep.deliverable}</p>
             </div>
@@ -96,7 +109,7 @@ export const Approach: React.FC = () => {
             <div className={styles.guaranteeBox}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
                 <ShieldCheck size={16} color="var(--accent-primary)" />
-                <span className={styles.guaranteeHeading}>Systemic Stability Guarantee</span>
+                <span className={styles.guaranteeHeading}>{t.approach.guaranteeHeading}</span>
               </div>
               <p className={styles.guaranteeContent}>{activeStep.architecturalGuarantee}</p>
             </div>
