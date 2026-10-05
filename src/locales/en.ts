@@ -77,6 +77,10 @@ export const en = {
         title: "Backend Engineering",
         desc: "Designing modular APIs, domain logic, authentication, fine-grained authorization, validation pipelines, and third-party integrations."
       },
+      frontend: {
+        title: "Front-End Engineering",
+        desc: "Crafting pixel-precise, accessible, and performant web interfaces using React, Next.js, and modern CSS — from design systems to animated, data-rich dashboards."
+      },
       database: {
         title: "Database Engineering",
         desc: "Designing relational schemas, domain models, indexing strategies, double-entry transactional ledgers, and document persistence."

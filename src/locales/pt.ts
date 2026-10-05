@@ -79,6 +79,10 @@ export const pt: typeof en = {
         title: "Engenharia de Backend",
         desc: "Projetando APIs modulares, lógica de domínio, autenticação, autorização granular, pipelines de validação e integrações com terceiros."
       },
+      frontend: {
+        title: "Engenharia Front-End",
+        desc: "Criando interfaces web pixel-perfect, acessíveis e performáticas com React, Next.js e CSS moderno — de design systems a dashboards analíticos."
+      },
       database: {
         title: "Engenharia de Dados",
         desc: "Projetando esquemas relacionais, modelos de domínio, estratégias de indexação, livros-razão de partidas dobradas e persistência documental."

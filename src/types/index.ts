@@ -84,6 +84,12 @@ export interface EngineeringCapability {
   description: string;
   icon: string;
   keySkills: string[];
+  /** Detail bullets shown on the back face of the flip card */
+  backDetails: string[];
+  /** Accent colour key for this card (maps to a CSS token) */
+  accentKey?: string;
+  /** Architecture pipeline flow stages (e.g. ['Gateway', 'IoC Services', 'Database']) */
+  workflowSteps?: string[];
 }
 
 export interface MetricItem {

@@ -1,5 +1,5 @@
 .capabilities {
-  padding: 4.5rem 1.5rem;
+  padding: 5rem 1.5rem;
   background-color: var(--bg-primary);
   position: relative;
   border-top: 1px solid var(--border-subtle);
@@ -12,7 +12,7 @@
 
 .header {
   max-width: 720px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 3.5rem;
   text-align: center;
 }
 
@@ -53,46 +53,123 @@
   line-height: 1.65;
 }
 
+/* Responsive Grid */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 680px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
+  /* Center 7th item on 2-column layout */
+  .grid > *:last-child:nth-child(2n + 1) {
+    grid-column: span 2;
+    max-width: 520px;
+    width: 100%;
+    margin: 0 auto;
   }
 }
 
-.card {
-  padding: 2rem 1.75rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+@media (min-width: 1080px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.85rem;
+  }
+
+  .grid > *:last-child:nth-child(2n + 1) {
+    grid-column: unset;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* Center 7th item in the middle column of 3-column layout */
+  .grid > *:last-child:nth-child(3n + 1) {
+    grid-column: 2;
+  }
+}
+
+/* 3D Flip Card Container */
+.flipWrapper {
+  perspective: 1400px;
+  cursor: pointer;
+  position: relative;
+  min-height: 440px;
   border-radius: var(--radius-lg);
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.flipWrapper:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 4px;
+}
+
+/* Card Faces */
+.face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color var(--transition-normal),
+              box-shadow var(--transition-normal);
+  transform-style: preserve-3d;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 1.25rem;
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
-  position: relative;
   overflow: hidden;
 }
 
-.card:hover {
-  transform: translateY(-4px);
+.flipWrapper:hover .face {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-medium);
+}
+
+.front {
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+  background: linear-gradient(155deg, var(--bg-card) 0%, rgba(27, 67, 50, 0.14) 100%);
+  border-color: var(--border-subtle);
+}
+
+.flipped .front {
+  transform: rotateY(-180deg);
+}
+
+.flipped .back {
+  transform: rotateY(0deg);
   border-color: var(--accent-subtle-border);
   box-shadow: var(--shadow-md);
 }
 
+.flipped:hover .back {
+  border-color: var(--accent-primary);
+}
+
+/* Inner Layout */
+.faceInner {
+  padding: 1.6rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+/* Front Face Elements */
 .cardHeader {
   display: flex;
   align-items: center;
@@ -100,8 +177,8 @@
 }
 
 .iconWrapper {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-md);
   background: var(--forest-badge-bg);
   border: 1px solid var(--forest-badge-border);
@@ -109,41 +186,313 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.flipWrapper:hover .iconWrapper {
+  transform: scale(1.06);
+  background: var(--accent-subtle);
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.statusIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+}
+
+.statusDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
 }
 
 .number {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-muted);
 }
 
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
 .cardTitle {
-  font-size: 1.25rem;
+  font-size: 1.22rem;
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: -0.015em;
+  line-height: 1.25;
 }
 
 .cardDesc {
-  font-size: 0.925rem;
+  font-size: 0.885rem;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
+/* Technical Workflow Pipeline Architecture Block */
+.workflowContainer {
+  background: rgba(13, 40, 30, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color var(--transition-fast);
+}
+
+[data-theme="dark"] .workflowContainer {
+  background: rgba(8, 28, 21, 0.45);
+}
+
+.flipWrapper:hover .workflowContainer {
+  border-color: var(--accent-subtle-border);
+}
+
+.workflowHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.workflowLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.workflowIcon {
+  color: var(--accent-primary);
+}
+
+.stepCount {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--text-faint);
+}
+
+.pipelineFlow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pipelineStage {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 0.18rem 0.45rem;
+  border-radius: var(--radius-xs);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.flipWrapper:hover .pipelineStage {
+  border-color: var(--border-medium);
+}
+
+.stageIndex {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.stageName {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Skills Pills */
 .skillsList {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  padding-top: 0.75rem;
+  gap: 0.35rem;
+  padding-top: 0.5rem;
   border-top: 1px solid var(--border-subtle);
 }
 
 .skillPill {
-  font-size: 0.725rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  padding: 0.25rem 0.65rem;
+  padding: 0.2rem 0.55rem;
   background: var(--bg-secondary);
   border-radius: var(--radius-full);
   color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.flipWrapper:hover .skillPill {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+/* Back Face Elements */
+.backHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.backHeaderTitles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.backEyebrow {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+}
+
+.backTitle {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.backList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.backItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.checkIcon {
+  color: var(--accent-primary);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.backFootnote {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--forest-badge-bg);
+  border: 1px solid var(--forest-badge-border);
+  border-radius: var(--radius-sm);
+}
+
+.footnoteBadge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--accent-primary);
+}
+
+.footnoteText {
+  font-size: 0.725rem;
+  color: var(--text-secondary);
+}
+
+/* Flip Hints */
+.flipHint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--border-subtle);
+  transition: color var(--transition-fast), gap var(--transition-fast);
+}
+
+.hintRotate {
+  transition: transform var(--transition-normal);
+}
+
+.flipWrapper:hover .hintRotate {
+  transform: rotate(-180deg);
+}
+
+.flipWrapper:hover .flipHint {
+  color: var(--accent-primary);
+  gap: 0.55rem;
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .face {
+    transition: opacity 0.2s ease;
+  }
+
+  .front {
+    transform: none !important;
+  }
+
+  .back {
+    transform: none !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .flipped .front {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .flipped .back {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }

@@ -16,6 +16,13 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
   railos: <GraduationCap size={18} />
 };
 
+const FLAGSHIP_IMAGES: Record<string, string> = {
+  agritrack: "/project-assets/agritrack.png",
+  foundra: "/project-assets/foundra.png",
+  railos: "/project-assets/railos.png",
+  hostelix: "/project-assets/hostelix.png",
+};
+
 export const FlagshipProjects: React.FC = () => {
   const { t } = useTranslation();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -49,11 +56,12 @@ export const FlagshipProjects: React.FC = () => {
             <article key={project.id} className={styles.card}>
               <div className={styles.imageWrapper}>
                 <Image
-                  src={project.image}
+                  src={FLAGSHIP_IMAGES[project.id] ?? project.image}
                   alt={`${project.title} interface preview`}
                   fill
                   sizes="(max-width: 768px) 100vw, 600px"
                   className={styles.cardImage}
+                  unoptimized
                 />
                 <div className={styles.floatingCategoryIcon}>
                   {CATEGORY_ICONS[project.id] || <Building2 size={18} />}

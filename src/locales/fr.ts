@@ -79,6 +79,10 @@ export const fr: typeof en = {
         title: "Ingénierie Backend",
         desc: "Conception d'API modulaires, logique métier, authentification, autorisation granulaire, pipelines de validation et intégrations."
       },
+      frontend: {
+        title: "Ingénierie Front-End",
+        desc: "Création d'interfaces web ultra-précises, accessibles et performantes avec React, Next.js et CSS moderne — des design systems aux tableaux de bord réactifs."
+      },
       database: {
         title: "Ingénierie des Données",
         desc: "Modélisation relationnelle, stratégies d'indexation, registres comptables en partie double et persistance documentaire."

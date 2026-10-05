@@ -79,6 +79,10 @@ export const de: typeof en = {
         title: "Backend-Engineering",
         desc: "Entwurf modularer APIs, Domänenlogik, Authentifizierung, fein granularer Autorisierung, Validierung und Drittanbieter-Integrationen."
       },
+      frontend: {
+        title: "Front-End-Engineering",
+        desc: "Entwicklung pixelgenauer, barrierefreier und hochperformanter Weboberflächen mit React, Next.js und modernem CSS — von Designsystemen bis zu interaktiven Dashboards."
+      },
       database: {
         title: "Datenbank-Engineering",
         desc: "Entwurf relationaler Schemata, Domänenmodelle, Indizierungsstrategien, doppelter Buchführung und Dokumentenspeicherung."
