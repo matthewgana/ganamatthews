@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { X, CheckCircle2, Github, AlertCircle, ArrowUpRight } from "lucide-react";
 import { Project } from "@/types";
 import { useTranslation } from "@/providers/IntlProvider";
@@ -13,33 +13,74 @@ interface ProjectModalProps {
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const { t } = useTranslation();
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousActiveElementRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
     if (project) {
+      previousActiveElementRef.current = document.activeElement as HTMLElement;
       document.body.style.overflow = "hidden";
+      requestAnimationFrame(() => {
+        closeButtonRef.current?.focus();
+      });
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (e.key === "Tab" && modalRef.current) {
+        const focusables = modalRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusables.length === 0) return;
+
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    };
+
+    if (project) {
       window.addEventListener("keydown", handleKeyDown);
     }
+
     return () => {
       document.body.style.overflow = "unset";
       window.removeEventListener("keydown", handleKeyDown);
+      previousActiveElementRef.current?.focus?.();
     };
   }, [project, onClose]);
 
   if (!project) return null;
 
   return (
-    <div className={styles.backdrop} onClick={onClose} aria-hidden="true">
+    <div className={styles.overlayWrapper}>
+      <div className={styles.backdrop} onClick={onClose} aria-hidden="true" />
       <div
+        ref={modalRef}
         className={styles.modal}
-        onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="project-modal-title"
+        tabIndex={-1}
       >
         <button
+          ref={closeButtonRef}
           type="button"
           onClick={onClose}
           className={styles.closeButton}

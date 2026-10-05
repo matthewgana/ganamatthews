@@ -12,6 +12,7 @@
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-full);
   padding: 0.35rem 0.65rem;
+  min-height: 38px;
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -221,6 +222,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0.6rem;
+  min-height: 44px;
   border-radius: var(--radius-sm);
   background: var(--bg-card);
   border: 1px solid var(--border-medium);

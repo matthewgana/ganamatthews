@@ -89,30 +89,24 @@
   margin-bottom: 5rem;
 }
 
-.projectRow {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
+.projectArticle {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 1.5rem 1.75rem;
-  cursor: pointer;
+  position: relative;
+  overflow: hidden;
   transition:
     border-color var(--transition-normal),
     box-shadow var(--transition-normal),
     background var(--transition-normal),
     transform var(--transition-fast);
-  position: relative;
-  overflow: hidden;
-  text-align: left;
 }
 
-.projectRow::before {
+.projectArticle::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
+  inset-inline-start: 0;
   bottom: 0;
   width: 3px;
   background: var(--border-medium);
@@ -120,20 +114,30 @@
   transition: background var(--transition-normal);
 }
 
-.projectRow:hover,
-.projectRowActive {
+.projectArticle:hover,
+.projectArticleActive {
   border-color: var(--accent-subtle-border);
   box-shadow: var(--shadow-md);
   background: var(--bg-card-hover);
 }
 
-.projectRow:hover::before,
-.projectRowActive::before {
+.projectArticle:hover::before,
+.projectArticleActive::before {
   background: var(--accent-primary);
 }
 
-.projectRowActive {
+.projectArticleActive {
   box-shadow: var(--shadow-lg);
+}
+
+.projectRow {
+  width: 100%;
+  display: block;
+  background: transparent;
+  border: none;
+  padding: 1.5rem 1.75rem;
+  cursor: pointer;
+  text-align: start;
 }
 
 .projectRowInner {
@@ -238,8 +242,8 @@
 
 /* ── EXPANDED PROJECT DETAIL (when active) ───────────────── */
 .projectDetail {
-  margin-top: 1.25rem;
-  padding-top: 1.25rem;
+  margin-top: 0;
+  padding: 1.25rem 1.75rem 1.75rem;
   border-top: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: column;

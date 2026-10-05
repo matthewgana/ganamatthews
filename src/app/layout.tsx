@@ -62,6 +62,7 @@ export const metadata: Metadata = {
       "ja": "https://matthewgana.dev/",
       "de": "https://matthewgana.dev/",
       "es": "https://matthewgana.dev/",
+      "zh-CN": "https://matthewgana.dev/",
       "zh-Hans": "https://matthewgana.dev/",
       "x-default": "https://matthewgana.dev/"
     }
@@ -69,39 +70,79 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#081c15",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#07150f" },
+    { media: "(prefers-color-scheme: light)", color: "#f8f7f2" }
+  ],
   width: "device-width",
   initialScale: 1
 };
 
-const personSchema = {
+const jsonLdGraph = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Matthew Gana",
-  "url": "https://matthewgana.dev",
-  "sameAs": [
-    "https://github.com/matthewgana",
-    "https://www.linkedin.com/in/matthewsgana",
-    "https://www.youtube.com/@LearnWithMatthewGana"
-  ],
-  "jobTitle": "Full-Stack Software Engineer",
-  "description": "Backend-focused full-stack engineer specialising in SaaS architecture, enterprise APIs, AI/ML integration, and domain-driven design.",
-  "knowsAbout": [
-    "TypeScript",
-    "NestJS",
-    "PostgreSQL",
-    "Next.js",
-    "React Native",
-    "Software Architecture",
-    "Domain-Driven Design",
-    "AI/ML Integration",
-    "Cybersecurity"
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://matthewgana.dev/#person",
+      "name": "Matthew Gana",
+      "url": "https://matthewgana.dev",
+      "image": "https://matthewgana.dev/gmatts.png",
+      "sameAs": [
+        "https://github.com/matthewgana",
+        "https://www.linkedin.com/in/matthewsgana",
+        "https://www.youtube.com/@LearnWithMatthewGana",
+        "https://www.instagram.com/learnwithmatthewgana"
+      ],
+      "jobTitle": "Full-Stack Software Engineer",
+      "description": "Backend-focused full-stack software engineer specialising in SaaS architecture, enterprise APIs, AI/ML integrations, and domain-driven design.",
+      "knowsAbout": [
+        "TypeScript",
+        "NestJS",
+        "PostgreSQL",
+        "Next.js",
+        "React Native",
+        "Python",
+        "FastAPI",
+        "Redis",
+        "Docker",
+        "Software Architecture",
+        "Domain-Driven Design",
+        "AI/ML Integration",
+        "Cybersecurity"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://matthewgana.dev/#website",
+      "url": "https://matthewgana.dev",
+      "name": "Matthew Gana | Full-Stack Software Engineer",
+      "description": "Personal developer portfolio of Matthew Gana, Full-Stack Software Engineer. Building secure, scalable, and intelligent software systems.",
+      "publisher": {
+        "@id": "https://matthewgana.dev/#person"
+      },
+      "inLanguage": ["en", "fr", "pt", "ar", "ja", "de", "es", "zh-CN"]
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://matthewgana.dev/#webpage",
+      "url": "https://matthewgana.dev",
+      "name": "Matthew Gana — Full-Stack Software Engineer Portfolio",
+      "isPartOf": {
+        "@id": "https://matthewgana.dev/#website"
+      },
+      "about": {
+        "@id": "https://matthewgana.dev/#person"
+      },
+      "mainEntity": {
+        "@id": "https://matthewgana.dev/#person"
+      }
+    }
   ]
 };
 
 // Inline FOUC-prevention script — runs synchronously before first paint
-// so the correct theme is applied without flash.
-const themeScript = `(function(){try{var s=localStorage.getItem('mg_theme');var t=(s==='light'||s==='dark')?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add(t);}catch(e){document.documentElement.setAttribute('data-theme','dark');document.documentElement.classList.add('dark');}})();`;
+// so the correct theme and language/RTL direction are applied without flash.
+const themeScript = `(function(){try{var s=localStorage.getItem('mg_theme');var t=(s==='light'||s==='dark')?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add(t);var l=localStorage.getItem('mg_lang');if(l==='ar'){document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang','ar');}else if(l){document.documentElement.setAttribute('lang',l);}}catch(e){document.documentElement.setAttribute('data-theme','dark');document.documentElement.classList.add('dark');}})();`;
 
 export default function RootLayout({
   children
@@ -111,12 +152,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Theme FOUC prevention — must run before body paints */}
+        {/* Theme & Direction FOUC prevention — must run before body paints */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        {/* Schema.org Person structured data for rich SEO */}
+        {/* Schema.org Person, WebSite, & ProfilePage structured data for rich SEO */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
         />
       </head>
       <body>

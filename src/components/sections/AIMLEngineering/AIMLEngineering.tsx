@@ -79,6 +79,7 @@ export const AIMLEngineering: React.FC = () => {
             return (
               <article
                 key={project.id}
+                className={clsx(styles.projectArticle, isActive && styles.projectArticleActive)}
                 role="listitem"
               >
                 <button
@@ -124,34 +125,37 @@ export const AIMLEngineering: React.FC = () => {
                           flexShrink: 0
                         }}
                         aria-hidden="true"
+                        data-rtl-mirror={isActive ? "false" : "true"}
                       />
                     </div>
                   </div>
-
-                  {/* Expanded Detail Panel */}
-                  {isActive && (
-                    <div
-                      id={`aiml-detail-${project.id}`}
-                      className={styles.projectDetail}
-                    >
-                      <p className={styles.detailDescription}>{project.description}</p>
-
-                      {project.evidence && project.evidence.length > 0 && (
-                        <>
-                          <span className={styles.evidenceHeading}>{t.aiml.evidenceLabel}</span>
-                          <ul className={styles.evidenceList} role="list">
-                            {project.evidence.map((ev, i) => (
-                              <li key={i} className={styles.evidenceItem} role="listitem">
-                                <CheckCircle2 size={14} className={styles.evidenceCheck} aria-hidden="true" />
-                                <span>{ev}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </>
-                      )}
-                    </div>
-                  )}
                 </button>
+
+                {/* Expanded Detail Panel (outside the button for valid HTML & accessible screen-reader navigation) */}
+                {isActive && (
+                  <div
+                    id={`aiml-detail-${project.id}`}
+                    className={styles.projectDetail}
+                    role="region"
+                    aria-label={`${project.shortTitle} details`}
+                  >
+                    <p className={styles.detailDescription}>{project.description}</p>
+
+                    {project.evidence && project.evidence.length > 0 && (
+                      <>
+                        <span className={styles.evidenceHeading}>{t.aiml.evidenceLabel}</span>
+                        <ul className={styles.evidenceList} role="list">
+                          {project.evidence.map((ev, i) => (
+                            <li key={i} className={styles.evidenceItem} role="listitem">
+                              <CheckCircle2 size={14} className={styles.evidenceCheck} aria-hidden="true" />
+                              <span>{ev}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                  </div>
+                )}
               </article>
             );
           })}

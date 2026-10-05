@@ -242,7 +242,7 @@
 .handwrittenScript {
   position: absolute;
   top: 15%;
-  right: -10px;
+  inset-inline-end: -10px;
   font-family: Georgia, serif;
   font-style: italic;
   font-size: 1.1rem;
@@ -259,6 +259,10 @@
   backdrop-filter: blur(8px);
 }
 
+:global([dir="rtl"]) .handwrittenScript {
+  transform: rotate(-4deg);
+}
+
 :global([data-theme="light"]) .handwrittenScript {
   background: rgba(255, 255, 255, 0.85);
   color: var(--color-forest-900);
@@ -269,7 +273,7 @@
 /* Vertical evidence rail (from mockup right side 01..11) */
 .evidenceRail {
   position: absolute;
-  right: 1.25rem;
+  inset-inline-end: 1.25rem;
   bottom: 2rem;
   display: flex;
   flex-direction: column;
@@ -299,7 +303,7 @@
 .floatingStatusStrip {
   position: absolute;
   bottom: 1.25rem;
-  left: 1.25rem;
+  inset-inline-start: 1.25rem;
   z-index: 5;
   display: inline-flex;
   align-items: center;

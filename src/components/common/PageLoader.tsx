@@ -19,18 +19,26 @@ export const PageLoader: React.FC = () => {
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
-    // Minimum display time so the animation has purpose
-    const MIN_MS = 400;
+    // Respect user's motion preference: if reduced motion requested, dismiss immediately
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVisible(false);
+      return;
+    }
+
+    // Minimum display time so the entrance transition is smooth and intentional
+    const MIN_MS = 350;
     const start = Date.now();
+    let fadeTimer: NodeJS.Timeout | null = null;
+    let removeTimer: NodeJS.Timeout | null = null;
 
     const dismiss = () => {
       const elapsed = Date.now() - start;
       const remaining = Math.max(0, MIN_MS - elapsed);
 
-      setTimeout(() => {
+      fadeTimer = setTimeout(() => {
         setFading(true);
         // Remove from DOM after CSS transition completes
-        setTimeout(() => setVisible(false), 500);
+        removeTimer = setTimeout(() => setVisible(false), 500);
       }, remaining);
     };
 
@@ -39,8 +47,17 @@ export const PageLoader: React.FC = () => {
     } else {
       const onLoad = () => dismiss();
       window.addEventListener("load", onLoad, { once: true });
-      return () => window.removeEventListener("load", onLoad);
+      return () => {
+        window.removeEventListener("load", onLoad);
+        if (fadeTimer) clearTimeout(fadeTimer);
+        if (removeTimer) clearTimeout(removeTimer);
+      };
     }
+
+    return () => {
+      if (fadeTimer) clearTimeout(fadeTimer);
+      if (removeTimer) clearTimeout(removeTimer);
+    };
   }, []);
 
   if (!visible) return null;

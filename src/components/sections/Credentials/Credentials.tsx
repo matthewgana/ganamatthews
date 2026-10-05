@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { 
   ShieldCheck, 
@@ -53,6 +53,10 @@ export const Credentials: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState<CountdownTime>(() => calculateTimeRemaining(AI_ML_TARGET_DATE));
   const [mounted, setMounted] = useState(false);
 
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousActiveElementRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     setMounted(true);
     const interval = setInterval(() => {
@@ -61,20 +65,53 @@ export const Credentials: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Modal keyboard dismiss
+  // Modal keyboard dismiss & focus trap
   useEffect(() => {
+    if (selectedCredential) {
+      previousActiveElementRef.current = document.activeElement as HTMLElement;
+      document.body.style.overflow = "hidden";
+      requestAnimationFrame(() => {
+        closeButtonRef.current?.focus();
+      });
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setSelectedCredential(null);
+        return;
+      }
+
+      if (e.key === "Tab" && modalRef.current) {
+        const focusables = modalRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusables.length === 0) return;
+
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
       }
     };
+
     if (selectedCredential) {
-      document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleKeyDown);
     }
+
     return () => {
       document.body.style.overflow = "unset";
       window.removeEventListener("keydown", handleKeyDown);
+      previousActiveElementRef.current?.focus?.();
     };
   }, [selectedCredential]);
 
@@ -291,19 +328,22 @@ export const Credentials: React.FC = () => {
 
       {/* Full Credential Inspection Modal */}
       {selectedCredential && (
-        <div 
-          className={styles.modalBackdrop} 
-          onClick={() => setSelectedCredential(null)}
-          aria-hidden="true"
-        >
+        <div className={styles.modalOverlayWrapper}>
           <div 
+            className={styles.modalBackdrop} 
+            onClick={() => setSelectedCredential(null)}
+            aria-hidden="true"
+          />
+          <div 
+            ref={modalRef}
             className={styles.modalContent} 
-            onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-cred-title"
+            tabIndex={-1}
           >
             <button
+              ref={closeButtonRef}
               type="button"
               onClick={() => setSelectedCredential(null)}
               className={styles.closeButton}
@@ -391,10 +431,10 @@ export const Credentials: React.FC = () => {
                 {/* Verified Skills Breakdown */}
                 {selectedCredential.skills && selectedCredential.skills.length > 0 && (
                   <div className={styles.modalSkillsSection}>
-                    <h5 className={styles.skillsSectionHeading}>
+                    <h4 className={styles.skillsSectionHeading}>
                       <Layers size={14} />
                       <span>Assessed Competencies & Verification Scope</span>
-                    </h5>
+                    </h4>
                     <div className={styles.modalSkillsGrid}>
                       {selectedCredential.skills.map((skill, i) => (
                         <div key={i} className={styles.modalSkillItem}>
