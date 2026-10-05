@@ -294,11 +294,15 @@ export const Credentials: React.FC = () => {
         <div 
           className={styles.modalBackdrop} 
           onClick={() => setSelectedCredential(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-cred-title"
+          aria-hidden="true"
         >
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+          <div 
+            className={styles.modalContent} 
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-cred-title"
+          >
             <button
               type="button"
               onClick={() => setSelectedCredential(null)}

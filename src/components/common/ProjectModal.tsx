@@ -31,8 +31,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   if (!project) return null;
 
   return (
-    <div className={styles.backdrop} onClick={onClose} role="dialog" aria-modal="true">
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+    <div className={styles.backdrop} onClick={onClose} aria-hidden="true">
+      <div
+        className={styles.modal}
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-modal-title"
+      >
         <button
           type="button"
           onClick={onClose}
@@ -56,7 +62,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               ] || project.maturity}
             </span>
           </div>
-          <h2 className={styles.modalTitle}>{project.title}</h2>
+          <h2 id="project-modal-title" className={styles.modalTitle}>{project.title}</h2>
           <p className={styles.modalSubtitle}>{project.subtitle}</p>
         </div>
 

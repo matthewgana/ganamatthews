@@ -89,6 +89,9 @@ export const IntlProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         locales: allLocales
       }}
     >
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        {mounted ? `Language: ${currentMeta.nativeName} (${currentMeta.name})` : ""}
+      </div>
       {children}
     </IntlContext.Provider>
   );

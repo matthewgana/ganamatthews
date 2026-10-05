@@ -1,3 +1,4 @@
+import React from "react";
 import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { IntlProvider } from "@/providers/IntlProvider";
@@ -50,6 +51,20 @@ export const metadata: Metadata = {
     icon: "/icon.png",
     shortcut: "/icon.png",
     apple: "/icon.png"
+  },
+  alternates: {
+    canonical: "https://matthewgana.dev/",
+    languages: {
+      "en": "https://matthewgana.dev/",
+      "fr": "https://matthewgana.dev/",
+      "pt": "https://matthewgana.dev/",
+      "ar": "https://matthewgana.dev/",
+      "ja": "https://matthewgana.dev/",
+      "de": "https://matthewgana.dev/",
+      "es": "https://matthewgana.dev/",
+      "zh-Hans": "https://matthewgana.dev/",
+      "x-default": "https://matthewgana.dev/"
+    }
   }
 };
 
@@ -59,6 +74,35 @@ export const viewport: Viewport = {
   initialScale: 1
 };
 
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Matthew Gana",
+  "url": "https://matthewgana.dev",
+  "sameAs": [
+    "https://github.com/matthewgana",
+    "https://www.linkedin.com/in/matthewsgana",
+    "https://www.youtube.com/@LearnWithMatthewGana"
+  ],
+  "jobTitle": "Full-Stack Software Engineer",
+  "description": "Backend-focused full-stack engineer specialising in SaaS architecture, enterprise APIs, AI/ML integration, and domain-driven design.",
+  "knowsAbout": [
+    "TypeScript",
+    "NestJS",
+    "PostgreSQL",
+    "Next.js",
+    "React Native",
+    "Software Architecture",
+    "Domain-Driven Design",
+    "AI/ML Integration",
+    "Cybersecurity"
+  ]
+};
+
+// Inline FOUC-prevention script — runs synchronously before first paint
+// so the correct theme is applied without flash.
+const themeScript = `(function(){try{var s=localStorage.getItem('mg_theme');var t=(s==='light'||s==='dark')?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add(t);}catch(e){document.documentElement.setAttribute('data-theme','dark');document.documentElement.classList.add('dark');}})();`;
+
 export default function RootLayout({
   children
 }: Readonly<{
@@ -66,11 +110,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Theme FOUC prevention — must run before body paints */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Schema.org Person structured data for rich SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+      </head>
       <body>
         <ThemeProvider>
           <IntlProvider>
             <Header />
-            <main>{children}</main>
+            <main id="main-content" aria-label="Portfolio main content">
+              {children}
+            </main>
             <Footer />
           </IntlProvider>
         </ThemeProvider>

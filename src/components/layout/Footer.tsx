@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
           <nav className={styles.navLinks} aria-label="Footer navigation">
             <a href="#home" className={styles.navLink}>{t.nav.home}</a>
             <a href="#work" className={styles.navLink}>{t.nav.work}</a>
-            <a href="#engineering" className={styles.navLink}>{t.nav.engineering}</a>
+            <a href="#aiml" className={styles.navLink}>{t.nav.aiml}</a>
             <a href="#about" className={styles.navLink}>{t.nav.about}</a>
             <a href="#writing" className={styles.navLink}>{t.nav.writing}</a>
             <a href="#contact" className={styles.navLink}>{t.nav.contact}</a>

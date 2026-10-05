@@ -1,4 +1,5 @@
 import React from "react";
+import { PageLoader } from "@/components/common/PageLoader";
 import { Hero } from "@/components/sections/Hero/Hero";
 import { Technologies } from "@/components/sections/Technologies/Technologies";
 import { Capabilities } from "@/components/sections/Capabilities/Capabilities";
@@ -15,6 +16,7 @@ import { Contact } from "@/components/sections/Contact/Contact";
 export default function HomePage() {
   return (
     <>
+      <PageLoader />
       <Hero />
       <Technologies />
       <Capabilities />

@@ -54,7 +54,13 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className={clsx(styles.header, scrolled && styles.scrolled)}>
+    <>
+      {/* Skip to main content — first focusable element for keyboard nav */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+
+      <header className={clsx(styles.header, scrolled && styles.scrolled)}>
       <div className={styles.container}>
         {/* Brand Monogram — Smooth scroll back to hero */}
         <Link 
@@ -147,10 +153,12 @@ export const Header: React.FC = () => {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div
+        <button
+          type="button"
           className={styles.mobileBackdrop}
           onClick={() => setMobileMenuOpen(false)}
-          aria-hidden="true"
+          aria-label="Close navigation menu"
+          tabIndex={-1}
         />
       )}
       <div
@@ -241,7 +249,8 @@ export const Header: React.FC = () => {
           </div>
         </div>
       </div>
-    </header>
+      </header>
+    </>
   );
 };
 export default Header;
