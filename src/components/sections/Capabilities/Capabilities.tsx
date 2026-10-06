@@ -3,20 +3,20 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   Code2, Database, Layers, ShieldCheck, Cpu, Layout,
-  Monitor, CheckCircle2, RotateCcw, ArrowRight, Activity
+  Monitor, CheckCircle2, RotateCcw, Activity
 } from "lucide-react";
 import { useTranslation } from "@/providers/IntlProvider";
 import { CAPABILITIES } from "@/data/capabilities";
 import styles from "./Capabilities.module.css";
 
 const ICONS_MAP: Record<string, React.ReactNode> = {
-  Code2:       <Code2 size={20} />,
-  Database:    <Database size={20} />,
-  Layers:      <Layers size={20} />,
-  ShieldCheck: <ShieldCheck size={20} />,
-  Cpu:         <Cpu size={20} />,
-  Layout:      <Layout size={20} />,
-  Monitor:     <Monitor size={20} />,
+  Code2:       <Code2 size={22} />,
+  Database:    <Database size={22} />,
+  Layers:      <Layers size={22} />,
+  ShieldCheck: <ShieldCheck size={22} />,
+  Cpu:         <Cpu size={22} />,
+  Layout:      <Layout size={22} />,
+  Monitor:     <Monitor size={22} />,
 };
 
 // Stagger offset per card so they auto-flip in a graceful wave
@@ -142,7 +142,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ cap, title, desc, index }) => {
           {/* Flip Hint */}
           <div className={styles.flipHint}>
             <RotateCcw size={13} className={styles.hintRotate} />
-            <span>Click to view implementation evidence</span>
+            <span>View production evidence</span>
           </div>
         </div>
       </div>
@@ -180,7 +180,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ cap, title, desc, index }) => {
           {/* Flip Back Hint */}
           <div className={styles.flipHint}>
             <RotateCcw size={13} className={styles.hintRotate} />
-            <span>Click to return to overview</span>
+            <span>Back to overview</span>
           </div>
         </div>
       </div>

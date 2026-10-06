@@ -2,8 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, FileText, Github, Linkedin, ShieldCheck } from "lucide-react";
+import { FileText, Github, Linkedin } from "lucide-react";
 import gsap from "gsap";
 import { useTranslation } from "@/providers/IntlProvider";
 import styles from "./Hero.module.css";
@@ -74,7 +73,6 @@ export const Hero: React.FC = () => {
           <div className={styles.ctaRow}>
             <a href="#work" className={styles.primaryCta}>
               <span>{t.hero.ctaPrimary}</span>
-              <ArrowRight size={18} data-rtl-mirror="true" />
             </a>
             <a href="#contact" className={styles.secondaryCta}>
               <span>{t.hero.ctaSecondary}</span>
@@ -128,27 +126,6 @@ export const Hero: React.FC = () => {
               className={styles.portraitImage}
             />
             <div className={styles.portraitGradientOverlay} />
-
-            {/* Handwritten Script Callout (as in the mockup) */}
-            <div className={styles.handwrittenScript}>
-              &quot;{t.hero.handwritten}&quot;
-            </div>
-
-            {/* Vertical Evidence Rail (01 to 11) */}
-            <div className={styles.evidenceRail}>
-              <span>01</span>
-              <span className={styles.railLine} />
-              <span>02</span>
-              <span>03</span>
-              <span>04</span>
-              <span>05</span>
-              <span>06</span>
-              <span>07</span>
-              <span>08</span>
-              <span>09</span>
-              <span>10</span>
-              <span>11</span>
-            </div>
 
             {/* Floating Status Indicator */}
             <div className={styles.floatingStatusStrip}>

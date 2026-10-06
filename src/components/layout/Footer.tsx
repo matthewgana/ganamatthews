@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className={styles.bottomRow}>
-          <span>© 2026 Matthew Gana. {t.footer.rights}</span>
+          <span className={styles.copyright}>© 2026 Matthew Gana. {t.footer.rights}</span>
 
           <div className={styles.socialGroup}>
             <a
