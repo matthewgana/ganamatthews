@@ -1,7 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, MapPin, Linkedin, Github, Send, Youtube, Instagram, Facebook } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Linkedin,
+  Github,
+  Send,
+  Youtube,
+  Instagram,
+  Facebook,
+  Loader2,
+  CheckCircle2,
+  AlertCircle,
+  RotateCcw,
+} from "lucide-react";
 import { useTranslation } from "@/providers/IntlProvider";
 import styles from "./Contact.module.css";
 
@@ -11,19 +24,53 @@ export const Contact: React.FC = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("role");
   const [message, setMessage] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [sentInfo, setSentInfo] = useState({ name: "", email: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subjectTitle = t.contact.subjectOptions[subject as keyof typeof t.contact.subjectOptions] || subject;
+    setStatus("submitting");
+    setErrorMessage("");
 
-    const mailSubject = encodeURIComponent(
-      `[Portfolio Contact] ${subjectTitle} from ${name}`
-    );
-    const mailBody = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nTopic: ${subjectTitle}\n\nMessage:\n${message}`
-    );
+    const subjectTitle =
+      t.contact.subjectOptions[subject as keyof typeof t.contact.subjectOptions] ||
+      subject;
 
-    window.location.href = `mailto:matthewgana95@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          subject: subjectTitle,
+          message: message.trim(),
+          _gotcha: honeypot,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setSentInfo({ name: name.trim(), email: email.trim() });
+        setStatus("success");
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        setStatus("error");
+        setErrorMessage(
+          data.error || "Unable to deliver message right now. Please try again."
+        );
+      }
+    } catch {
+      setStatus("error");
+      setErrorMessage(
+        "Network connection error. You can also contact me directly via email."
+      );
+    }
   };
 
   return (
@@ -137,81 +184,154 @@ export const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Interactive Form */}
-          <form className={styles.formCard} onSubmit={handleSubmit}>
-            <div className={styles.formRow}>
-              <div className={styles.inputGroup}>
-                <label htmlFor="contact-name" className={styles.label}>
-                  {t.contact.nameLabel}
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder={t.contact.namePlaceholder}
-                  className={styles.input}
-                />
+          {/* Right Column: Interactive Form or Success Confirmation */}
+          {status === "success" ? (
+            <div className={styles.successCard} role="status" aria-live="polite">
+              <div className={styles.successIconWrap}>
+                <CheckCircle2 size={36} />
               </div>
 
-              <div className={styles.inputGroup}>
-                <label htmlFor="contact-email" className={styles.label}>
-                  {t.contact.emailLabel}
-                </label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={t.contact.emailPlaceholder}
-                  className={styles.input}
-                />
-              </div>
-            </div>
+              <h3 className={styles.successTitle}>Message Delivered!</h3>
 
-            <div className={styles.inputGroup}>
-              <label htmlFor="contact-subject" className={styles.label}>
-                {t.contact.subjectLabel}
-              </label>
-              <select
-                id="contact-subject"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                className={styles.select}
+              <p className={styles.successDesc}>
+                Thank you, <strong>{sentInfo.name || "there"}</strong>! Your inquiry was sent directly to my inbox at{" "}
+                <span style={{ color: "var(--accent-primary)", fontWeight: 700 }}>
+                  matthewgana95@gmail.com
+                </span>
+                . I will review it and reply back to <strong>{sentInfo.email}</strong> shortly.
+              </p>
+
+              <button
+                type="button"
+                className={styles.resetButton}
+                onClick={() => setStatus("idle")}
               >
-                <option value="role">{t.contact.subjectOptions.role}</option>
-                <option value="project">{t.contact.subjectOptions.project}</option>
-                <option value="collaboration">{t.contact.subjectOptions.collaboration}</option>
-                <option value="other">{t.contact.subjectOptions.other}</option>
-              </select>
+                <RotateCcw size={16} />
+                <span>Send another message</span>
+              </button>
             </div>
+          ) : (
+            <form className={styles.formCard} onSubmit={handleSubmit} noValidate={false}>
+              {/* Hidden Honeypot Anti-Spam Field */}
+              <div style={{ display: "none" }} aria-hidden="true">
+                <label htmlFor="contact-gotcha">Do not fill this field</label>
+                <input
+                  id="contact-gotcha"
+                  type="text"
+                  name="_gotcha"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
+              </div>
 
-            <div className={styles.inputGroup}>
-              <label htmlFor="contact-message" className={styles.label}>
-                {t.contact.messageLabel}
-              </label>
-              <textarea
-                id="contact-message"
-                required
-                rows={4}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder={t.contact.messagePlaceholder}
-                className={styles.textarea}
-              />
-            </div>
+              {status === "error" && (
+                <div className={styles.errorAlert} role="alert">
+                  <AlertCircle size={18} className={styles.errorIcon} />
+                  <div>
+                    <span>{errorMessage}</span>
+                    <a
+                      href="mailto:matthewgana95@gmail.com"
+                      className={styles.fallbackMailLink}
+                    >
+                      Email directly instead
+                    </a>
+                  </div>
+                </div>
+              )}
 
-            <button type="submit" className={styles.submitButton}>
-              <span>{t.contact.sendButton}</span>
-              <Send size={16} data-rtl-mirror="true" />
-            </button>
+              <div className={styles.formRow}>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="contact-name" className={styles.label}>
+                    {t.contact.nameLabel}
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    required
+                    disabled={status === "submitting"}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder={t.contact.namePlaceholder}
+                    className={styles.input}
+                  />
+                </div>
 
-            <p className={styles.formNotice}>
-              {t.contact.mailtoNotice}
-            </p>
-          </form>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="contact-email" className={styles.label}>
+                    {t.contact.emailLabel}
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    required
+                    disabled={status === "submitting"}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={t.contact.emailPlaceholder}
+                    className={styles.input}
+                  />
+                </div>
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label htmlFor="contact-subject" className={styles.label}>
+                  {t.contact.subjectLabel}
+                </label>
+                <select
+                  id="contact-subject"
+                  value={subject}
+                  disabled={status === "submitting"}
+                  onChange={(e) => setSubject(e.target.value)}
+                  className={styles.select}
+                >
+                  <option value="role">{t.contact.subjectOptions.role}</option>
+                  <option value="project">{t.contact.subjectOptions.project}</option>
+                  <option value="collaboration">{t.contact.subjectOptions.collaboration}</option>
+                  <option value="other">{t.contact.subjectOptions.other}</option>
+                </select>
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label htmlFor="contact-message" className={styles.label}>
+                  {t.contact.messageLabel}
+                </label>
+                <textarea
+                  id="contact-message"
+                  required
+                  rows={4}
+                  disabled={status === "submitting"}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder={t.contact.messagePlaceholder}
+                  className={styles.textarea}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className={styles.submitButton}
+                disabled={status === "submitting"}
+              >
+                {status === "submitting" ? (
+                  <>
+                    <Loader2 size={17} className={styles.spinner} />
+                    <span>Sending message...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{t.contact.sendButton}</span>
+                    <Send size={16} data-rtl-mirror="true" />
+                  </>
+                )}
+              </button>
+
+              <p className={styles.formNotice}>
+                Messages are delivered directly to matthewgana95@gmail.com with instant in-page confirmation.
+              </p>
+            </form>
+          )}
         </div>
       </div>
     </section>
