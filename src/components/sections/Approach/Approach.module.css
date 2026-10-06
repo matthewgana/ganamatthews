@@ -381,3 +381,44 @@
   color: var(--text-secondary);
   line-height: 1.5;
 }
+
+@media (max-width: 639px) {
+  .approach {
+    padding: 3.5rem 1rem 3rem;
+  }
+
+  .header {
+    margin: 0 auto 2rem;
+  }
+
+  .tickerOuter {
+    margin-bottom: 1.75rem;
+  }
+
+  .flowLayout {
+    gap: 1.75rem;
+  }
+
+  .stepRow {
+    padding: 0.85rem 1rem;
+    min-height: 48px;
+  }
+
+  .inspectorBox {
+    position: static;
+    padding: 1.35rem 1.15rem;
+    gap: 1.25rem;
+  }
+
+  .inspectorHeader {
+    padding-bottom: 1rem;
+  }
+
+  .deliverableBox {
+    padding: 1rem 1.15rem;
+  }
+
+  .guaranteeBox {
+    padding: 0.9rem 1.15rem;
+  }
+}

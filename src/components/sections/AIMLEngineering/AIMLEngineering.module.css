@@ -500,3 +500,47 @@
     padding: 4.5rem 2.5rem;
   }
 }
+
+@media (max-width: 639px) {
+  .aiml {
+    padding: 3.5rem 1rem 3rem;
+  }
+
+  .header {
+    margin: 0 auto 2rem;
+  }
+
+  .disciplinesRow {
+    margin-bottom: 2rem;
+    gap: 0.35rem;
+  }
+
+  .disciplineTag {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .projectMatrix {
+    margin-bottom: 3.5rem;
+  }
+
+  .projectRow {
+    padding: 1.15rem 1rem;
+  }
+
+  .projectTitle {
+    font-size: 0.975rem;
+  }
+
+  .projectDetail {
+    padding: 1rem 1rem 1.25rem;
+  }
+
+  .workflowSection {
+    padding-top: 2.5rem;
+  }
+
+  .workflowHeader {
+    margin: 0 auto 1.75rem;
+  }
+}

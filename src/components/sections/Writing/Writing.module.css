@@ -123,3 +123,22 @@
   border-radius: 50%;
   background: var(--color-forest-400);
 }
+
+@media (max-width: 639px) {
+  .writing {
+    padding: 3.5rem 1rem 3rem;
+  }
+
+  .header {
+    margin: 0 auto 2rem;
+  }
+
+  .card {
+    padding: 1.25rem 1.15rem;
+    gap: 1rem;
+  }
+
+  .cardTitle {
+    font-size: 1.1rem;
+  }
+}

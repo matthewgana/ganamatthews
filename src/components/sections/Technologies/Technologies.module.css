@@ -45,7 +45,7 @@
     padding: 4.5rem 1.5rem 3rem;
     overflow: hidden;
     isolation: isolate;
-    background: 
+    background:
         radial-gradient(circle at 50% 0%, rgba(64, 145, 108, 0.08) 0%, transparent 60%),
         radial-gradient(circle at 80% 50%, rgba(224, 109, 40, 0.05) 0%, transparent 50%),
         var(--tech-bg);
@@ -241,9 +241,18 @@
     height: 10px;
     border-radius: 50%;
 }
-.windowDotRed { background: #ff5f56; }
-.windowDotYellow { background: #ffbd2e; }
-.windowDotGreen { background: #27c93f; }
+
+.windowDotRed {
+    background: #ff5f56;
+}
+
+.windowDotYellow {
+    background: #ffbd2e;
+}
+
+.windowDotGreen {
+    background: #27c93f;
+}
 
 .windowTitle {
     font-family: var(--font-mono);
@@ -281,12 +290,32 @@
     white-space: pre;
 }
 
-.tokenKeyword { color: #f2823b; font-weight: 700; }
-.tokenVariable { color: #52b788; font-weight: 700; }
-.tokenProperty { color: #74c69d; }
-.tokenString { color: #fdba74; }
-.tokenComment { color: #527c65; font-style: italic; }
-.tokenPunctuation { color: #b7e4c7; }
+.tokenKeyword {
+    color: #f2823b;
+    font-weight: 700;
+}
+
+.tokenVariable {
+    color: #52b788;
+    font-weight: 700;
+}
+
+.tokenProperty {
+    color: #74c69d;
+}
+
+.tokenString {
+    color: #fdba74;
+}
+
+.tokenComment {
+    color: #527c65;
+    font-style: italic;
+}
+
+.tokenPunctuation {
+    color: #b7e4c7;
+}
 
 /* ─────────────────────────────────────────────────────────
    CATEGORY PILLS GRID (MATCHING THE MOCKUP)
@@ -471,7 +500,8 @@
     cursor: pointer;
 }
 
-.node:hover, .activeNode {
+.node:hover,
+.activeNode {
     border-color: var(--tech-node-border-hover);
     box-shadow: 0 4px 18px rgba(224, 109, 40, 0.25);
     transform: scale(1.02);
@@ -550,12 +580,26 @@
 }
 
 .coreLogoContainer {
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.coreLogo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.65);
+    mix-blend-mode: screen;
+}
+
+:global([data-theme="light"]) .coreLogo {
+    mix-blend-mode: multiply;
 }
 
 .coreIdentity {
@@ -705,20 +749,16 @@
     position: relative;
     z-index: 2;
     padding: 0.5rem 0;
-    mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 8%,
-        black 92%,
-        transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 8%,
-        black 92%,
-        transparent 100%
-    );
+    mask-image: linear-gradient(to right,
+            transparent 0%,
+            black 8%,
+            black 92%,
+            transparent 100%);
+    -webkit-mask-image: linear-gradient(to right,
+            transparent 0%,
+            black 8%,
+            black 92%,
+            transparent 100%);
 }
 
 .tickerTrack {
@@ -735,8 +775,13 @@
 }
 
 @keyframes techTickerScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 .footerTag {

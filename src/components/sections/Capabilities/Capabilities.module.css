@@ -730,3 +730,69 @@
     animation: none;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE (< 640px) — PURPOSE-BUILT COMPACT EXPERIENCE
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 639px) {
+  .capabilities {
+    padding: 3.5rem 1rem 3rem;
+  }
+
+  .header {
+    margin: 0 auto 2.25rem;
+  }
+
+  .grid {
+    gap: 1.25rem;
+  }
+
+  .faceInner {
+    padding: 1.25rem 1.15rem 1.15rem;
+    gap: 0.85rem;
+  }
+
+  .cardTitle {
+    font-size: 1.15rem;
+  }
+
+  .iconWrapper {
+    width: 42px;
+    height: 42px;
+  }
+
+  .workflowContainer {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .pipelineStage {
+    padding: 0.18rem 0.45rem;
+  }
+
+  .stageName {
+    font-size: 0.64rem;
+  }
+
+  .skillPill {
+    font-size: 0.65rem;
+    padding: 0.18rem 0.5rem;
+  }
+
+  .backHeader {
+    gap: 0.7rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .backTitle {
+    font-size: 1.05rem;
+  }
+
+  .backItem {
+    font-size: 0.8rem;
+    gap: 0.5rem;
+  }
+
+  .backFootnote {
+    padding: 0.45rem 0.75rem;
+  }
+}

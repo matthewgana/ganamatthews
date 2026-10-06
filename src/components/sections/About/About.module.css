@@ -171,3 +171,33 @@
 .stemLink:hover {
   color: var(--accent-hover);
 }
+
+@media (max-width: 639px) {
+  .about {
+    padding: 3.5rem 1rem 3rem;
+  }
+
+  .grid {
+    gap: 2.25rem;
+  }
+
+  .portraitCard {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .badgesRow {
+    gap: 0.65rem;
+  }
+
+  .metaBadge {
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 130px;
+    padding: 0.65rem 0.85rem;
+  }
+
+  .stemCard {
+    padding: 1.25rem 1rem;
+    margin-top: 0.5rem;
+  }
+}
