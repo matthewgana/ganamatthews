@@ -47,16 +47,17 @@
   height: 38px;
   border-radius: var(--radius-sm);
   background: linear-gradient(135deg, var(--color-forest-800), var(--color-forest-950));
-  border: 1px solid rgba(224, 109, 40, 0.4);
+  border: 1.5px solid rgba(224, 109, 40, 0.4);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 900;
-  font-size: 1rem;
-  letter-spacing: -0.05em;
+  font-weight: 800;
+  font-size: 0.84rem;
+  letter-spacing: 0.04em;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: transform var(--transition-fast), border-color var(--transition-fast);
+  flex-shrink: 0;
 }
 
 :global([data-theme="light"]) .monogram {
@@ -73,8 +74,17 @@
   flex-direction: column;
 }
 
-.brandName {
+.brandNameDesktop {
   font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  display: block;
+}
+
+.brandNameMobile {
+  display: none;
+  font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text-primary);
@@ -85,6 +95,18 @@
   font-weight: 600;
   color: var(--accent-text);
   letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .brandNameDesktop {
+    display: none;
+  }
+  .brandNameMobile {
+    display: block;
+  }
+  .brandTitle {
+    display: none;
+  }
 }
 
 /* Desktop Navigation */
@@ -135,7 +157,19 @@
   gap: 0.75rem;
 }
 
-/* Language Switcher */
+.desktopActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (max-width: 899px) {
+  .desktopActions {
+    display: none;
+  }
+}
+
+/* Language Switcher in Header */
 .langSelect {
   display: flex;
   align-items: center;
@@ -155,7 +189,7 @@
   border-color: var(--accent-primary);
 }
 
-/* Download CV Button (Pill CTA matching mockup) */
+/* Download CV Button (Desktop Pill CTA) */
 .downloadCvButton {
   display: inline-flex;
   align-items: center;
@@ -191,37 +225,7 @@
   transform: translateY(0) scale(0.97);
 }
 
-@media (max-width: 640px) {
-  .downloadCvButton {
-    display: none;
-  }
-}
-
-.drawerDownloadButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: #d6a238;
-  color: #0b140e;
-  font-size: 0.95rem;
-  font-weight: 700;
-  padding: 0.75rem 1.25rem;
-  border-radius: var(--radius-full);
-  text-decoration: none;
-  box-shadow: 0 4px 14px rgba(214, 162, 56, 0.3);
-  transition: all var(--transition-fast);
-  text-align: center;
-  width: 100%;
-}
-
-.drawerDownloadButton:hover {
-  background: #e2b044;
-  color: #000000;
-  transform: translateY(-1px);
-}
-
-/* Theme Toggle Button */
+/* Theme Toggle Button (Desktop) */
 .themeToggle {
   width: 36px;
   height: 36px;
@@ -242,18 +246,31 @@
   transform: rotate(15deg);
 }
 
-/* Mobile Menu Toggle */
+/* Mobile Menu Toggle (Clean outline container matching mockup) */
 .mobileMenuToggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-card);
-  border: 1px solid var(--border-medium);
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid var(--border-medium);
   color: var(--text-primary);
   cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+:global([data-theme="light"]) .mobileMenuToggle {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.mobileMenuToggle:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: var(--accent-subtle);
 }
 
 @media (min-width: 900px) {
@@ -262,24 +279,35 @@
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE FULL-SCREEN DRAWER (MATCHING DESIGN SPECIFICATION)
+   ═══════════════════════════════════════════════════════════════════════════ */
 .mobileDrawer {
   position: fixed;
   top: 0;
   inset-inline-end: 0;
   width: 100%;
-  max-width: 340px;
+  max-width: 380px;
   height: 100vh;
   background: var(--bg-primary);
   border-inline-start: 1px solid var(--border-medium);
   box-shadow: var(--shadow-xl);
   z-index: 200;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem 1.25rem 2.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 1.25rem;
   overflow-y: auto;
+  overscroll-behavior: contain;
   transform: translateX(100%);
   transition: transform var(--transition-smooth);
+}
+
+@media (max-width: 600px) {
+  .mobileDrawer {
+    max-width: 100%;
+    padding: 1.25rem 1.25rem 2.5rem;
+  }
 }
 
 :global([dir="rtl"]) .mobileDrawer {
@@ -294,8 +322,9 @@
 .mobileBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   z-index: 199;
   border: none;
   padding: 0;
@@ -305,39 +334,218 @@
   -webkit-appearance: none;
 }
 
+/* Drawer Header */
 .drawerHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--border-subtle);
 }
 
+.drawerBrandName {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.drawerCloseButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+:global([data-theme="light"]) .drawerCloseButton {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.drawerCloseButton:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: scale(1.05);
+}
+
+/* Navigation Links List */
 .drawerNav {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.3rem;
 }
 
 .drawerNavLink {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  padding: 0.5rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  position: relative;
+  text-decoration: none;
+  transition: all var(--transition-fast);
 }
 
 .drawerNavLink:hover {
+  background: var(--accent-subtle);
   color: var(--accent-primary);
 }
 
-.drawerFooter {
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-subtle);
+.drawerNavLinkActive {
+  background: var(--accent-subtle);
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.drawerActiveIndicator {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 3.5px;
+  background-color: var(--accent-primary);
+  border-radius: 0 3px 3px 0;
+  box-shadow: 0 0 10px var(--accent-primary);
+}
+
+:global([dir="rtl"]) .drawerActiveIndicator {
+  border-radius: 3px 0 0 3px;
+}
+
+.drawerNavContent {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.drawerNavIcon {
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.drawerNavLink:hover .drawerNavIcon,
+.drawerNavIconActive {
+  color: var(--accent-primary);
+}
+
+.drawerNavChevron {
+  color: var(--text-muted);
+  opacity: 0.6;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.drawerNavLink:hover .drawerNavChevron {
+  opacity: 1;
+  color: var(--accent-primary);
+  transform: translateX(2px);
+}
+
+:global([dir="rtl"]) .drawerNavLink:hover .drawerNavChevron {
+  transform: translateX(-2px) scaleX(-1);
+}
+
+/* Download CV Pill Button (Full width) */
+.drawerCtaWrapper {
+  margin-top: 0.35rem;
+}
+
+.drawerDownloadButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: #d6a238;
+  color: #0b140e;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.8rem 1.25rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(214, 162, 56, 0.35);
+  transition: all var(--transition-fast);
+  text-align: center;
+  width: 100%;
+}
+
+.drawerDownloadButton:hover {
+  background: #e2b044;
+  color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(214, 162, 56, 0.45);
+}
+
+/* Language and Theme Sections */
+.drawerSection {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.45rem;
+  margin-top: 0.25rem;
 }
+
+.drawerSectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.drawerSectionIcon {
+  color: var(--text-muted);
+}
+
+/* Segmented Theme Switcher Control */
+.themeSegmentControl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.3rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+:global([data-theme="light"]) .themeSegmentControl {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.themeSegmentBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.themeSegmentBtn:hover {
+  color: var(--text-primary);
+}
+
+.themeSegmentActive {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 14px rgba(224, 109, 40, 0.22);
+}
+

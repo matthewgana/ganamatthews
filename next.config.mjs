@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  devIndicators: false,
   // Image optimization enabled — Next.js will serve WebP/AVIF, resize,
   // and lazy-load below-fold images automatically.
   images: {
