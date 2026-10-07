@@ -410,9 +410,19 @@
     gap: 2.25rem;
   }
 
+  .title {
+    font-size: clamp(1.9rem, 7.5vw, 2.5rem);
+    line-height: 1.15;
+  }
+
   .formCard {
     padding: 1.25rem 1rem;
     gap: 1rem;
+  }
+
+  /* Ensure 2-col formRow never shows on very small screens */
+  .formRow {
+    grid-template-columns: 1fr !important;
   }
 
   .submitButton {
@@ -421,8 +431,27 @@
     padding: 0.85rem 1.5rem;
   }
 
+  /* Detail cards: prevent long email from overflowing */
+  .detailValue {
+    font-size: 0.875rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+  }
+
   .detailCard {
     min-height: 48px;
     padding: 0.75rem 1rem;
+  }
+
+  /* Social pills: ensure they wrap on mobile */
+  .socialPillsGrid {
+    gap: 0.45rem;
+  }
+
+  .socialPill {
+    font-size: 0.775rem;
+    padding: 0.45rem 0.75rem;
   }
 }

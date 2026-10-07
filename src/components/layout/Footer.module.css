@@ -229,6 +229,18 @@
 
   .navLinks {
     gap: 0.5rem 1.25rem;
+    justify-content: flex-start;
+  }
+
+  .navLink {
+    padding: 0.3rem 0.4rem;
+    font-size: 0.825rem;
+  }
+
+  .socialGroup {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
   }
 
   .socialIcon {
@@ -239,5 +251,11 @@
   .bottomRow {
     gap: 1.25rem;
     padding-top: 1.5rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .copyright {
+    font-size: 0.75rem;
   }
 }

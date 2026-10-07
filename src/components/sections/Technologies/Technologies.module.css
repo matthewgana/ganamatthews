@@ -805,3 +805,183 @@
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — Technologies (max-width: 639px)
+   Strategy:
+   - Code panel: horizontally scrollable, full-width, reduced font
+   - Topology: 3-col canvas → 2-col flat tech grid with tap affordance
+   - Center core & SVG connections hidden; HUD shown as info strip below grid
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 639px) {
+    .technologies {
+        padding: 3rem 1rem 2.5rem;
+    }
+
+    .backgroundGlow {
+        width: 100%;
+        max-width: 320px;
+        height: 320px;
+    }
+
+    /* ── TOP ROW: Code panel comes after text on mobile (already single-col) ── */
+    .topRow {
+        gap: 1.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .title {
+        font-size: clamp(1.9rem, 7vw, 2.4rem);
+    }
+
+    /* Code panel: internal horizontal scroll, never overflows the viewport */
+    .codePanel {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .codeBody {
+        font-size: 0.7rem;
+        line-height: 1.65;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 1rem;
+        /* Ensure inner code doesn't overflow its panel */
+        max-width: 100%;
+    }
+
+    .lineContent {
+        white-space: nowrap; /* keep per-line but allow the body to scroll */
+    }
+
+    /* ── Category pills: 2-col, tighter ── */
+    .categoryPills {
+        gap: 0.65rem;
+        margin-bottom: 2rem;
+    }
+
+    .categoryCard {
+        padding: 0.85rem 0.75rem;
+        gap: 0.35rem;
+    }
+
+    .categoryHeader {
+        font-size: 0.8rem;
+    }
+
+    .categoryStack {
+        font-size: 0.68rem;
+    }
+
+    /* ── Topology Section: Header stays, canvas restructured ── */
+    .topologySection {
+        padding: 1.5rem 1rem;
+    }
+
+    .topologyHeader {
+        margin: 0 0 1.5rem;
+    }
+
+    .topologyTitle {
+        font-size: 1.2rem;
+    }
+
+    /* ── Canvas: override 3-col grid → 2-col compact grid ── */
+    .canvas {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.65rem;
+        min-height: unset;
+        position: relative;
+    }
+
+    /* Hide SVG connection lines on mobile */
+    .connections {
+        display: none !important;
+    }
+
+    /* Both left and right columns flow into the 2-col grid */
+    .column {
+        display: contents; /* children flow directly into the parent grid */
+    }
+
+    /* Hide the center core/HUD on mobile — replaced by a compact info strip */
+    .center {
+        display: none;
+    }
+
+    /* Tech nodes: compact pill style in 2-col grid */
+    .node {
+        width: 100%;
+        padding: 0.65rem 0.6rem;
+        gap: 0.45rem;
+        border-radius: var(--radius-sm);
+        /* Reset left/right alignment differences */
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+
+    /* Override leftNode reversed layout */
+    .leftNode {
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+
+    .leftNode .logoWrapper {
+        order: -1;
+    }
+
+    .logoWrapper {
+        width: 28px;
+        height: 28px;
+        font-size: 0.65rem;
+        flex-shrink: 0;
+    }
+
+    .nodeName {
+        font-size: 0.78rem;
+        line-height: 1.2;
+    }
+
+    .nodeDomain {
+        font-size: 0.52rem;
+        letter-spacing: 0.04em;
+        line-height: 1;
+    }
+
+    /* Active node: show color ring instead of scale */
+    .activeNode,
+    .node:hover {
+        transform: none;
+        box-shadow: 0 0 0 2px currentColor;
+    }
+
+    .dimmedNode {
+        opacity: 0.5;
+    }
+
+    /* Footer ticker: slightly smaller tags */
+    .footerTag {
+        font-size: 0.72rem;
+        padding: 0.35rem 0.75rem;
+    }
+}
+
+/* Extra tight: 360px */
+@media (max-width: 390px) {
+    .node {
+        padding: 0.55rem 0.5rem;
+    }
+
+    .nodeName {
+        font-size: 0.72rem;
+    }
+
+    .logoWrapper {
+        width: 24px;
+        height: 24px;
+        font-size: 0.6rem;
+    }
+}

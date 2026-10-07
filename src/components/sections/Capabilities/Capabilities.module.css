@@ -765,12 +765,20 @@
     padding: 0.6rem 0.75rem;
   }
 
+  /* Wrap pipeline stages so they don't overflow */
+  .pipelineFlow {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
   .pipelineStage {
     padding: 0.18rem 0.45rem;
+    flex-shrink: 0;
   }
 
   .stageName {
     font-size: 0.64rem;
+    white-space: nowrap;
   }
 
   .skillPill {
@@ -792,7 +800,19 @@
     gap: 0.5rem;
   }
 
+  /* Prevent footnote badge from overflowing on tiny screens */
   .backFootnote {
     padding: 0.45rem 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .footnoteBadge {
+    font-size: 0.55rem;
+    white-space: normal;
+  }
+
+  .footnoteText {
+    font-size: 0.68rem;
   }
 }

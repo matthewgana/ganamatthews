@@ -513,6 +513,7 @@
   .disciplinesRow {
     margin-bottom: 2rem;
     gap: 0.35rem;
+    justify-content: flex-start;
   }
 
   .disciplineTag {
@@ -532,6 +533,19 @@
     font-size: 0.975rem;
   }
 
+  /* Prevent capability tags from causing horizontal overflow */
+  .capabilitiesLine {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .capTag {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .projectDetail {
     padding: 1rem 1rem 1.25rem;
   }
@@ -541,6 +555,75 @@
   }
 
   .workflowHeader {
-    margin: 0 auto 1.75rem;
+    margin: 0 auto 1.5rem;
+  }
+
+  .workflowTitle {
+    font-size: clamp(1.3rem, 5vw, 1.65rem);
+  }
+
+  /* ── Workflow Pipeline: switch from hidden-overflow marquee → horizontal scroll ──
+     On mobile the auto-scrolling marquee is invisible/inaccessible.
+     Replace with a touch-scrollable phased container. */
+  .tickerOuter {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0.5rem 0 1.25rem;
+    /* Remove the fade masks that hide content at edges */
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 2%,
+      black 98%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 2%,
+      black 98%,
+      transparent 100%
+    );
+  }
+
+  .tickerOuter::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Stop auto-animation; let user swipe */
+  .tickerTrack {
+    animation: none !important;
+    animation-play-state: paused !important;
+    /* Show only the primary set (not the clone duplicate) */
+    width: max-content;
+  }
+
+  /* Reduce phase node minimum width on mobile */
+  .stepNode {
+    min-width: 90px;
+    padding: 0.6rem 0.85rem;
+  }
+
+  .stepNodeLabel {
+    font-size: 0.75rem;
+  }
+
+  /* Phase label smaller */
+  .phaseLabel {
+    font-size: 0.6rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .phaseArrow {
+    padding: 0 0.4rem;
+    margin-top: 1.6rem;
+  }
+
+  .workflowDisclaimer {
+    font-size: 0.775rem;
+    margin-top: 1.5rem;
   }
 }
