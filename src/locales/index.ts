@@ -7,6 +7,7 @@ import { ja } from "./ja";
 import { de } from "./de";
 import { es } from "./es";
 import { zhCN } from "./zh-CN";
+import { he } from "./he";
 
 export type Translations = typeof en;
 
@@ -58,6 +59,12 @@ export const LOCALES_META: Record<Language, LocaleMeta> = {
     name: "Simplified Chinese",
     nativeName: "简体中文",
     dir: "ltr"
+  },
+  he: {
+    code: "he",
+    name: "Hebrew",
+    nativeName: "עברית",
+    dir: "rtl"
   }
 };
 
@@ -69,7 +76,8 @@ export const SUPPORTED_LOCALES: Language[] = [
   "ja",
   "de",
   "es",
-  "zh-CN"
+  "zh-CN",
+  "he"
 ];
 
 export const TRANSLATIONS: Record<Language, Translations> = {
@@ -80,7 +88,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
   ja,
   de,
   es,
-  "zh-CN": zhCN
+  "zh-CN": zhCN,
+  he
 };
 
-export { en, fr, pt, ar, ja, de, es, zhCN };
+export { en, fr, pt, ar, ja, de, es, zhCN, he };

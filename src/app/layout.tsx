@@ -64,6 +64,7 @@ export const metadata: Metadata = {
       "es": "https://matthewgana.dev/",
       "zh-CN": "https://matthewgana.dev/",
       "zh-Hans": "https://matthewgana.dev/",
+      "he": "https://matthewgana.dev/",
       "x-default": "https://matthewgana.dev/"
     }
   }
@@ -120,7 +121,7 @@ const jsonLdGraph = {
       "publisher": {
         "@id": "https://matthewgana.dev/#person"
       },
-      "inLanguage": ["en", "fr", "pt", "ar", "ja", "de", "es", "zh-CN"]
+      "inLanguage": ["en", "fr", "pt", "ar", "ja", "de", "es", "zh-CN", "he"]
     },
     {
       "@type": "ProfilePage",
@@ -142,7 +143,7 @@ const jsonLdGraph = {
 
 // Inline FOUC-prevention script — runs synchronously before first paint
 // so the correct theme and language/RTL direction are applied without flash.
-const themeScript = `(function(){try{var s=localStorage.getItem('mg_theme');var t=(s==='light'||s==='dark')?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add(t);var l=localStorage.getItem('mg_lang');if(l==='ar'){document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang','ar');}else if(l){document.documentElement.setAttribute('lang',l);}}catch(e){document.documentElement.setAttribute('data-theme','dark');document.documentElement.classList.add('dark');}})();`;
+const themeScript = `(function(){try{var s=localStorage.getItem('mg_theme');var t=(s==='light'||s==='dark')?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.documentElement.classList.add(t);var l=localStorage.getItem('mg_lang');if(l==='ar'||l==='he'){document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang',l);}else if(l){document.documentElement.setAttribute('dir','ltr');document.documentElement.setAttribute('lang',l);}}catch(e){document.documentElement.setAttribute('data-theme','dark');document.documentElement.classList.add('dark');}})();`;
 
 export default function RootLayout({
   children

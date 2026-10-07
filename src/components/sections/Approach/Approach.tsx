@@ -103,7 +103,7 @@ export const Approach: React.FC = () => {
 
         <div className={styles.flowLayout}>
           {/* Left Column (Desktop) / Accordion Flow (Mobile): 11 Sequential Pipeline Steps */}
-          <div className={styles.stepsPipeline} role="tablist" aria-label="Engineering methodology pipeline">
+          <div className={styles.stepsPipeline} role="tablist" aria-label={t.approach.pipelineLabel}>
             {APPROACH_STEPS.map((step, idx) => {
               const isDesktopActive = desktopActiveIndex === idx;
               const isMobileOpen = mobileOpenIndex === idx;

@@ -299,6 +299,7 @@ export const Technologies: FC = () => {
       className={styles.technologies}
       aria-labelledby="technology-stack-heading"
     >
+      <span id="tech" style={{ position: "absolute", top: 0 }} aria-hidden="true" />
       <canvas data-particles className={styles.canvasParticles} aria-hidden="true" />
       <div data-glow className={styles.backgroundGlow} />
 
@@ -511,7 +512,7 @@ export const Technologies: FC = () => {
                 </div>
                 <div className={styles.coreIdentity}>
                   <span className={styles.coreIdentityBrand}>Matthew Gana</span>
-                  <span className={styles.coreIdentityRole}>Engineering Core</span>
+                  <span className={styles.coreIdentityRole}>{t.tech.engineeringCore}</span>
                 </div>
                 <span data-core-ring="1" className={styles.coreRing} />
                 <span data-core-ring="2" className={styles.coreRingTwo} />

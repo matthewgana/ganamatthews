@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "@/providers/IntlProvider";
 import styles from "./PageLoader.module.css";
 
 /**
@@ -15,6 +16,7 @@ import styles from "./PageLoader.module.css";
  *    the underlying content is present in the SSR HTML
  */
 export const PageLoader: React.FC = () => {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(true);
   const [fading, setFading] = useState(false);
 
@@ -81,7 +83,7 @@ export const PageLoader: React.FC = () => {
         </div>
 
         {/* Subtle tagline */}
-        <p className={styles.tagline}>Building secure, scalable systems</p>
+        <p className={styles.tagline}>{t.footer.tagline}</p>
       </div>
     </div>
   );

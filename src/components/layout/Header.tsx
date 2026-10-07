@@ -23,12 +23,13 @@ import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import styles from "./Header.module.css";
 
 export const Header: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, isRTL } = useTranslation();
   const { theme, setTheme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const mobileToggleRef = useRef<HTMLButtonElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -50,8 +51,24 @@ export const Header: React.FC = () => {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
+    let ticking = false;
+
+    const updateScrollProgress = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = totalHeight > 0 ? Math.min(Math.max(window.scrollY / totalHeight, 0), 1) : 0;
+      if (progressBarRef.current) {
+        progressBarRef.current.style.transform = `scaleX(${progress})`;
+      }
+      ticking = false;
+    };
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollProgress);
+        ticking = true;
+      }
 
       const sectionIds = ["contact", "about", "credentials", "aiml", "work", "home"];
       const scrollPosition = window.scrollY + 140;
@@ -70,8 +87,12 @@ export const Header: React.FC = () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   const handleLogoClick = (e?: React.MouseEvent) => {
@@ -99,7 +120,7 @@ export const Header: React.FC = () => {
     <>
       {/* Skip to main content — first focusable element for keyboard nav */}
       <a href="#main-content" className="skip-link">
-        Skip to main content
+        {t.common.skipToMain || "Skip to main content"}
       </a>
 
       <header className={clsx(styles.header, scrolled && styles.scrolled)}>
@@ -115,7 +136,7 @@ export const Header: React.FC = () => {
             <div className={styles.brandText}>
               <span className={styles.brandNameDesktop}>Matthew Gana</span>
               <span className={styles.brandNameMobile}>Gana</span>
-              <span className={styles.brandTitle}>Full-Stack Software Engineer</span>
+              <span className={styles.brandTitle}>{t.footer.brandTitle}</span>
             </div>
           </Link>
 
@@ -197,13 +218,28 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
+        {/* Scroll Progress Indicator (Option A) */}
+        <div 
+          className={styles.progressBarTrack}
+          role="progressbar"
+          aria-label="Scroll progress"
+          aria-valuemin={0}
+          aria-valuemax={100}
+        >
+          <div 
+            ref={progressBarRef}
+            className={styles.progressBarFill}
+            style={{ transformOrigin: isRTL ? "right" : "left" }}
+          />
+        </div>
+
         {/* Mobile Full-Screen Menu Drawer */}
         {mobileMenuOpen && (
           <button
             type="button"
             className={styles.mobileBackdrop}
             onClick={() => setMobileMenuOpen(false)}
-            aria-label="Close navigation menu"
+            aria-label={t.nav.closeMenu}
             tabIndex={-1}
           />
         )}
@@ -211,7 +247,7 @@ export const Header: React.FC = () => {
           className={clsx(styles.mobileDrawer, mobileMenuOpen && styles.mobileDrawerOpen)}
           role="dialog"
           aria-modal="true"
-          aria-label="Mobile navigation menu"
+          aria-label={t.nav.openMenu}
         >
           {/* Drawer Header */}
           <div className={styles.drawerHeader}>
@@ -229,7 +265,7 @@ export const Header: React.FC = () => {
               type="button"
               onClick={() => setMobileMenuOpen(false)}
               className={styles.drawerCloseButton}
-              aria-label="Close menu"
+              aria-label={t.nav.closeMenuShort || t.common.close}
             >
               <X size={20} />
             </button>
@@ -288,9 +324,9 @@ export const Header: React.FC = () => {
           <div className={styles.drawerSection}>
             <div className={styles.drawerSectionHeader}>
               <Sun size={14} className={styles.drawerSectionIcon} />
-              <span>THEME</span>
+              <span>{t.common.theme}</span>
             </div>
-            <div className={styles.themeSegmentControl} role="radiogroup" aria-label="Theme selection">
+            <div className={styles.themeSegmentControl} role="radiogroup" aria-label={t.common.theme}>
               <button
                 type="button"
                 role="radio"
@@ -299,7 +335,7 @@ export const Header: React.FC = () => {
                 className={clsx(styles.themeSegmentBtn, theme === "dark" && styles.themeSegmentActive)}
               >
                 <Moon size={15} />
-                <span>Dark</span>
+                <span>{t.common.dark}</span>
               </button>
               <button
                 type="button"
@@ -309,7 +345,7 @@ export const Header: React.FC = () => {
                 className={clsx(styles.themeSegmentBtn, theme === "light" && styles.themeSegmentActive)}
               >
                 <Sun size={15} />
-                <span>Light</span>
+                <span>{t.common.light}</span>
               </button>
             </div>
           </div>

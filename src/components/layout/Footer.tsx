@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialIcon}
-              aria-label="YouTube: @LearnWithMatthewGana"
+              aria-label={t.contact.youtubeAriaLabel}
             >
               <Youtube size={18} />
             </a>
@@ -71,7 +71,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialIcon}
-              aria-label="Instagram: @learnwithmatthewgana"
+              aria-label={t.contact.instagramAriaLabel}
             >
               <Instagram size={18} />
             </a>
@@ -80,7 +80,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialIcon}
-              aria-label="Facebook: Matthew Gana"
+              aria-label={t.contact.facebookAriaLabel}
             >
               <Facebook size={18} />
             </a>

@@ -1,4 +1,4 @@
-export type Language = "en" | "fr" | "pt" | "ar" | "ja" | "de" | "es" | "zh-CN";
+export type Language = "en" | "fr" | "pt" | "ar" | "ja" | "de" | "es" | "zh-CN" | "he";
 export type Direction = "ltr" | "rtl";
 
 export interface LocaleMeta {

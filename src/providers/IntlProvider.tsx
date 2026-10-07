@@ -30,6 +30,7 @@ function detectInitialLocale(): Language {
     const browserLang = navigator.language.toLowerCase();
     if (browserLang.startsWith("zh")) return "zh-CN";
     if (browserLang.startsWith("ar")) return "ar";
+    if (browserLang.startsWith("he") || browserLang.startsWith("iw")) return "he";
     if (browserLang.startsWith("fr")) return "fr";
     if (browserLang.startsWith("pt")) return "pt";
     if (browserLang.startsWith("ja")) return "ja";

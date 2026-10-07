@@ -151,7 +151,7 @@ export const Credentials: React.FC = () => {
                 onClick={() => handleCardClick(credential)}
                 tabIndex={0}
                 role="button"
-                aria-label={`Inspect credential: ${credential.title}`}
+                aria-label={`${t.credentials.inspectCredential}: ${credential.title}`}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
@@ -171,17 +171,17 @@ export const Credentials: React.FC = () => {
                       <>
                         <span className={styles.pulseDot} />
                         <Sparkles size={11} className={styles.statusIcon} />
-                        <span>Ongoing · 20d Sprint</span>
+                        <span>{t.credentials.statusOngoing} · {t.credentials.statusSprint}</span>
                       </>
                     ) : isAccredited ? (
                       <>
                         <Cpu size={11} className={styles.statusIcon} />
-                        <span>{credential.year} · Accredited</span>
+                        <span>{credential.year} · {t.credentials.statusAccredited}</span>
                       </>
                     ) : (
                       <>
                         <ShieldCheck size={12} className={styles.statusIcon} />
-                        <span>{credential.year} · Verified</span>
+                        <span>{credential.year} · {t.credentials.statusVerified}</span>
                       </>
                     )}
                   </div>
@@ -201,12 +201,12 @@ export const Credentials: React.FC = () => {
                       <div className={styles.imageOverlay}>
                         <div className={styles.inspectPrompt}>
                           <Maximize2 size={16} />
-                          <span>Inspect Full Certificate</span>
+                          <span>{t.credentials.inspectFullCertificate}</span>
                         </div>
                       </div>
                       <div className={styles.watermarkBadge}>
                         <Shield size={10} />
-                        <span>VERIFIED RECORD</span>
+                        <span>{t.credentials.verifiedRecord}</span>
                       </div>
                     </div>
                   ) : (
@@ -216,9 +216,9 @@ export const Credentials: React.FC = () => {
                         <div className={styles.liveIndicator}>
                           <span className={styles.pulseRadar} />
                           <Activity size={12} className={styles.radarIcon} />
-                          <span className={styles.liveText}>CAPSTONE IN PROGRESS</span>
+                          <span className={styles.liveText}>{t.credentials.capstoneInProgress}</span>
                         </div>
-                        <span className={styles.hudBadge}>COHORT 2026</span>
+                        <span className={styles.hudBadge}>{t.credentials.cohort}</span>
                       </div>
 
                       <div className={styles.timerMatrix}>
@@ -226,36 +226,36 @@ export const Credentials: React.FC = () => {
                           <span className={styles.timeVal}>
                             {mounted ? String(timeLeft.days).padStart(2, "0") : "20"}
                           </span>
-                          <span className={styles.timeUnit}>DAYS</span>
+                          <span className={styles.timeUnit}>{t.credentials.timeUnitDays}</span>
                         </div>
                         <span className={styles.timeColon}>:</span>
                         <div className={styles.timeBox}>
                           <span className={styles.timeVal}>
                             {mounted ? String(timeLeft.hours).padStart(2, "0") : "00"}
                           </span>
-                          <span className={styles.timeUnit}>HRS</span>
+                          <span className={styles.timeUnit}>{t.credentials.timeUnitHrs}</span>
                         </div>
                         <span className={styles.timeColon}>:</span>
                         <div className={styles.timeBox}>
                           <span className={styles.timeVal}>
                             {mounted ? String(timeLeft.minutes).padStart(2, "0") : "00"}
                           </span>
-                          <span className={styles.timeUnit}>MIN</span>
+                          <span className={styles.timeUnit}>{t.credentials.timeUnitMin}</span>
                         </div>
                         <span className={styles.timeColon}>:</span>
                         <div className={styles.timeBox}>
                           <span className={styles.timeVal}>
                             {mounted ? String(timeLeft.seconds).padStart(2, "0") : "00"}
                           </span>
-                          <span className={styles.timeUnit}>SEC</span>
+                          <span className={styles.timeUnit}>{t.credentials.timeUnitSec}</span>
                         </div>
                       </div>
 
                       {/* Progress Track */}
                       <div className={styles.progressSection}>
                         <div className={styles.progressLabels}>
-                          <span className={styles.progressStatus}>Curriculum Defense</span>
-                          <span className={styles.progressScore}>88% Complete</span>
+                          <span className={styles.progressStatus}>{t.credentials.curriculumDefense}</span>
+                          <span className={styles.progressScore}>{t.credentials.percentComplete}</span>
                         </div>
                         <div className={styles.progressBarWrapper}>
                           <div className={styles.progressBarActive} style={{ width: "88%" }} />
@@ -315,7 +315,7 @@ export const Credentials: React.FC = () => {
                   {/* Card Action Link */}
                   <div className={styles.cardActionRow}>
                     <span className={styles.actionText}>
-                      {isOngoing ? "View Capstone Roadmap" : t.credentials.viewCertificate}
+                      {isOngoing ? t.credentials.viewCapstoneRoadmap : t.credentials.viewCertificate}
                     </span>
                     <ArrowRight size={14} className={styles.actionArrow} data-rtl-mirror="true" />
                   </div>
@@ -347,7 +347,7 @@ export const Credentials: React.FC = () => {
               type="button"
               onClick={() => setSelectedCredential(null)}
               className={styles.closeButton}
-              aria-label="Close modal"
+              aria-label={t.common.close}
             >
               <X size={18} />
             </button>
@@ -369,25 +369,25 @@ export const Credentials: React.FC = () => {
                   <div className={styles.modalHudContainer}>
                     <div className={styles.modalHudCard}>
                       <Sparkles size={36} className={styles.modalHudIcon} />
-                      <h4 className={styles.modalHudTitle}>AI & Machine Learning Specialization</h4>
+                      <h4 className={styles.modalHudTitle}>{t.credentials.aimlSpecializationTitle}</h4>
                       <p className={styles.modalHudSubtitle}>
-                        Advanced curriculum covering Deep Learning, Transformer Architectures, and Retrieval-Augmented Generation.
+                        {t.credentials.aimlSpecializationDesc}
                       </p>
                       <div className={styles.modalTimerBox}>
                         <div className={styles.modalTimerRow}>
                           <span className={styles.modalTimerNum}>{String(timeLeft.days).padStart(2, "0")}</span>
-                          <span className={styles.modalTimerUnit}>DAYS</span>
+                          <span className={styles.modalTimerUnit}>{t.credentials.timeUnitDays}</span>
                           <span className={styles.modalTimerDivider}>:</span>
                           <span className={styles.modalTimerNum}>{String(timeLeft.hours).padStart(2, "0")}</span>
-                          <span className={styles.modalTimerUnit}>HRS</span>
+                          <span className={styles.modalTimerUnit}>{t.credentials.timeUnitHrs}</span>
                           <span className={styles.modalTimerDivider}>:</span>
                           <span className={styles.modalTimerNum}>{String(timeLeft.minutes).padStart(2, "0")}</span>
-                          <span className={styles.modalTimerUnit}>MIN</span>
+                          <span className={styles.modalTimerUnit}>{t.credentials.timeUnitMin}</span>
                           <span className={styles.modalTimerDivider}>:</span>
                           <span className={styles.modalTimerNum}>{String(timeLeft.seconds).padStart(2, "0")}</span>
-                          <span className={styles.modalTimerUnit}>SEC</span>
+                          <span className={styles.modalTimerUnit}>{t.credentials.timeUnitSec}</span>
                         </div>
-                        <div className={styles.modalTimerNote}>Live Countdown to Capstone Defense</div>
+                        <div className={styles.modalTimerNote}>{t.credentials.liveCountdownTitle}</div>
                       </div>
                     </div>
                   </div>
@@ -406,10 +406,10 @@ export const Credentials: React.FC = () => {
                     </span>
                     <span className={`${styles.modalStatusPill} ${styles[`modalStatus_${selectedCredential.status || "verified"}`]}`}>
                       {selectedCredential.status === "ongoing"
-                        ? "In Progress · 20-Day Target"
+                        ? t.credentials.inProgress20Day
                         : selectedCredential.status === "accredited"
-                        ? "Accredited Program"
-                        : "Verified & Issued"}
+                        ? t.credentials.accreditedProgram
+                        : t.credentials.verifiedIssued}
                     </span>
                   </div>
 
@@ -433,7 +433,7 @@ export const Credentials: React.FC = () => {
                   <div className={styles.modalSkillsSection}>
                     <h4 className={styles.skillsSectionHeading}>
                       <Layers size={14} />
-                      <span>Assessed Competencies & Verification Scope</span>
+                      <span>{t.credentials.assessedCompetencies}</span>
                     </h4>
                     <div className={styles.modalSkillsGrid}>
                       {selectedCredential.skills.map((skill, i) => (
@@ -449,16 +449,16 @@ export const Credentials: React.FC = () => {
                 {/* Verification Registry Box */}
                 <div className={styles.registryBox}>
                   <div className={styles.registryRow}>
-                    <span className={styles.regLabel}>Official Registry Hash:</span>
+                    <span className={styles.regLabel}>{t.credentials.officialRegistryHash}</span>
                     <code className={styles.regVal}>{selectedCredential.credentialCode}</code>
                   </div>
                   <div className={styles.registryRow}>
-                    <span className={styles.regLabel}>Issuance / Completion Year:</span>
+                    <span className={styles.regLabel}>{t.credentials.issuanceYear}</span>
                     <span className={styles.regVal}>{selectedCredential.year}</span>
                   </div>
                   <div className={styles.registryRow}>
-                    <span className={styles.regLabel}>Verification Authority:</span>
-                    <span className={styles.regVal}>Institutional Accreditation Record</span>
+                    <span className={styles.regLabel}>{t.credentials.verificationAuthority}</span>
+                    <span className={styles.regVal}>{t.credentials.institutionalRecord}</span>
                   </div>
                 </div>
 
@@ -470,7 +470,7 @@ export const Credentials: React.FC = () => {
                       rel="noopener noreferrer"
                       className={styles.modalPrimaryAction}
                     >
-                      <span>Open Full-Resolution Certificate</span>
+                      <span>{t.credentials.openFullResolution}</span>
                       <ExternalLink size={14} />
                     </a>
                   )}
@@ -479,7 +479,7 @@ export const Credentials: React.FC = () => {
                     onClick={() => setSelectedCredential(null)}
                     className={styles.modalCloseAction}
                   >
-                    Close Audit
+                    {t.credentials.closeAudit}
                   </button>
                 </div>
               </div>

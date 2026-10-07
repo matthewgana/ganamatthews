@@ -262,7 +262,7 @@ export const PROJECTS: Project[] = [
     technologies: ["NestJS", "TypeScript", "PostgreSQL", "Redis", "BullMQ", "Next.js"],
     architectureSummary: "Clean NestJS modular foundation designed for property asset lifecycles and asynchronous task dispatch.",
     keyEvidence: "Initial set of domain modules and relational schemas for property units, lease documents, and maintenance work orders.",
-    image: "/project-assets/estrava.jpg",
+    image: "/project-assets/estrava.png",
     isFlagship: false,
     githubUrl: "https://github.com/matthewgana",
     caveat: "Early-stage real estate prototype; mobile client remains in early scaffolding and is not presented as an active production app."

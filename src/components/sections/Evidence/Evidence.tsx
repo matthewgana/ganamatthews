@@ -79,7 +79,7 @@ export const Evidence: React.FC = () => {
         {/* Mobile Technical Evidence Sub-Heading (Centered with dashes) */}
         <div className={styles.mobileTechHeading}>
           <span className={styles.mobileTechHeadingDash} />
-          <span className={styles.mobileTechHeadingText}>TECHNICAL EVIDENCE</span>
+          <span className={styles.mobileTechHeadingText}>{t.evidence.technicalEvidenceLabel}</span>
           <span className={styles.mobileTechHeadingDash} />
         </div>
 

@@ -67,7 +67,7 @@ export const OtherProjects: React.FC = () => {
 
       markInteraction();
 
-      const setWidth = track.scrollWidth / 3;
+      const setWidth = track.scrollWidth / 2;
       if (setWidth <= 0) return;
 
       const cardElement = container.querySelector(`.${styles.card}`);
@@ -78,9 +78,9 @@ export const OtherProjects: React.FC = () => {
       const moveDirection = direction === "left" ? (isRTL ? 1 : -1) : (isRTL ? -1 : 1);
 
       // Boundary safety check before smooth scroll
-      if (moveDirection > 0 && container.scrollLeft >= setWidth * 1.85) {
+      if (moveDirection > 0 && container.scrollLeft >= setWidth - step) {
         container.scrollLeft -= setWidth;
-      } else if (moveDirection < 0 && container.scrollLeft <= setWidth * 0.15) {
+      } else if (moveDirection < 0 && container.scrollLeft <= step) {
         container.scrollLeft += setWidth;
       }
 
@@ -145,9 +145,9 @@ export const OtherProjects: React.FC = () => {
     if (!container || !track) return;
 
     const initScroll = () => {
-      const setWidth = track.scrollWidth / 3;
+      const setWidth = track.scrollWidth / 2;
       if (setWidth > 0 && container.scrollLeft === 0) {
-        container.scrollLeft = setWidth;
+        container.scrollLeft = 0;
       }
     };
     const initTimer = setTimeout(initScroll, 100);
@@ -176,11 +176,11 @@ export const OtherProjects: React.FC = () => {
       ) {
         container.scrollLeft += speed * delta;
 
-        const setWidth = track.scrollWidth / 3;
+        const setWidth = track.scrollWidth / 2;
         if (setWidth > 0) {
-          if (container.scrollLeft >= setWidth * 2) {
+          if (container.scrollLeft >= setWidth) {
             container.scrollLeft -= setWidth;
-          } else if (container.scrollLeft <= 20) {
+          } else if (container.scrollLeft <= 0) {
             container.scrollLeft += setWidth;
           }
         }
@@ -204,12 +204,12 @@ export const OtherProjects: React.FC = () => {
     const track = trackRef.current;
     if (!container || !track) return;
 
-    const setWidth = track.scrollWidth / 3;
+    const setWidth = track.scrollWidth / 2;
     if (setWidth <= 0) return;
 
-    if (container.scrollLeft >= setWidth * 2) {
+    if (container.scrollLeft >= setWidth) {
       container.scrollLeft -= setWidth;
-    } else if (container.scrollLeft <= 20) {
+    } else if (container.scrollLeft <= 0) {
       container.scrollLeft += setWidth;
     }
   }, []);
@@ -227,7 +227,7 @@ export const OtherProjects: React.FC = () => {
       onClick={() => handleCardClick(project)}
       tabIndex={isClone ? -1 : 0}
       role="button"
-      aria-label={`View details for ${project.title}`}
+      aria-label={`${t.projects.viewAuditFor} ${project.title}`}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
@@ -393,9 +393,8 @@ export const OtherProjects: React.FC = () => {
             }}
           >
             <div ref={trackRef} className={styles.marqueeTrack}>
-              {otherProjects.map((project) => renderCard(project, "set1", true))}
               {otherProjects.map((project) => renderCard(project, "primary", false))}
-              {otherProjects.map((project) => renderCard(project, "set3", true))}
+              {otherProjects.map((project) => renderCard(project, "clone", true))}
             </div>
           </div>
 

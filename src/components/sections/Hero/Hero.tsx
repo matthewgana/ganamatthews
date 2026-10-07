@@ -75,16 +75,17 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Skills / Tech Stack — Mobile Dedicated Card (Mockup) */}
-          <a href="#tech" className={styles.mobileTechStackCard} aria-label="Explore tech stack and architecture">
+          <a href="#tech" className={styles.mobileTechStackCard} aria-label={t.hero.exploreTechStack || "Explore tech stack and architecture"}>
             <div className={styles.mobileTechStackTags}>
               <div className={styles.mobileTechStackRow}>
-                <span><span className={styles.mobileTechDot}>•</span> Backend</span>
-                <span><span className={styles.mobileTechDot}>•</span> SaaS</span>
-                <span><span className={styles.mobileTechDot}>•</span> Architecture</span>
+                {t.hero.specialtiesList.slice(0, 3).map((item) => (
+                  <span key={item}><span className={styles.mobileTechDot}>•</span> {item}</span>
+                ))}
               </div>
               <div className={styles.mobileTechStackRow}>
-                <span><span className={styles.mobileTechDot}>•</span> AI/ML</span>
-                <span><span className={styles.mobileTechDot}>•</span> Security</span>
+                {t.hero.specialtiesList.slice(3).map((item) => (
+                  <span key={item}><span className={styles.mobileTechDot}>•</span> {item}</span>
+                ))}
               </div>
             </div>
             <div className={styles.mobileTechChevronBtn}>
@@ -243,10 +244,10 @@ export const Hero: React.FC = () => {
 
       {/* Mobile Scroll To Explore Indicator (Mockup) */}
       <div className={styles.mobileScrollCue}>
-        <a href="#work" className={styles.scrollDownBtn} aria-label="Scroll down to projects">
+        <a href="#work" className={styles.scrollDownBtn} aria-label={t.hero.scrollDown || "Scroll down to projects"}>
           <ChevronDown size={16} />
         </a>
-        <span className={styles.scrollDownText}>SCROLL TO EXPLORE</span>
+        <span className={styles.scrollDownText}>{t.hero.scrollToExplore}</span>
       </div>
     </section>
   );

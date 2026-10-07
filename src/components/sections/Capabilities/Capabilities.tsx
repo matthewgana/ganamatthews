@@ -31,6 +31,7 @@ interface FlipCardProps {
 }
 
 const FlipCard: React.FC<FlipCardProps> = ({ cap, title, desc, index }) => {
+  const { t } = useTranslation();
   const [flipped, setFlipped] = useState(false);
   const [hovered, setHovered] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -78,7 +79,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ cap, title, desc, index }) => {
       role="button"
       tabIndex={0}
       aria-pressed={flipped}
-      aria-label={`${title} — click to ${flipped ? "view overview & workflow" : "view verified evidence"}`}
+      aria-label={`${title} — ${flipped ? t.capabilities.clickToFlipBack : t.capabilities.clickToFlip}`}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
@@ -97,7 +98,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ cap, title, desc, index }) => {
             <div className={styles.cardMeta}>
               <span className={styles.statusIndicator}>
                 <span className={styles.statusDot} />
-                LIVE
+                {t.capabilities.liveStatus}
               </span>
               <span className={styles.number}>{cap.number}</span>
             </div>
@@ -115,9 +116,9 @@ const FlipCard: React.FC<FlipCardProps> = ({ cap, title, desc, index }) => {
               <div className={styles.workflowHeader}>
                 <div className={styles.workflowLabel}>
                   <Activity size={12} className={styles.workflowIcon} />
-                  <span>ARCHITECTURE PIPELINE</span>
+                  <span>{t.capabilities.architecturePipeline}</span>
                 </div>
-                <span className={styles.stepCount}>{cap.workflowSteps.length} STAGES</span>
+                <span className={styles.stepCount}>{cap.workflowSteps.length} {t.capabilities.stages}</span>
               </div>
               <div className={styles.pipelineFlow}>
                 {cap.workflowSteps.map((step, idx) => (
@@ -142,7 +143,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ cap, title, desc, index }) => {
           {/* Flip Hint */}
           <div className={styles.flipHint}>
             <RotateCcw size={13} className={styles.hintRotate} />
-            <span>View production evidence</span>
+            <span>{t.capabilities.viewProductionEvidence}</span>
           </div>
         </div>
       </div>
@@ -156,7 +157,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ cap, title, desc, index }) => {
               {ICONS_MAP[cap.icon] ?? <Code2 size={20} />}
             </div>
             <div className={styles.backHeaderTitles}>
-              <span className={styles.backEyebrow}>VERIFIED PRODUCTION EVIDENCE</span>
+              <span className={styles.backEyebrow}>{t.capabilities.verifiedProductionEvidence}</span>
               <h3 className={styles.backTitle}>{title}</h3>
             </div>
           </div>
@@ -173,14 +174,14 @@ const FlipCard: React.FC<FlipCardProps> = ({ cap, title, desc, index }) => {
 
           {/* Back Technical Summary Footnote */}
           <div className={styles.backFootnote}>
-            <span className={styles.footnoteBadge}>PRODUCTION PROVEN</span>
-            <span className={styles.footnoteText}>Engineered with modular, testable patterns</span>
+            <span className={styles.footnoteBadge}>{t.capabilities.productionProven}</span>
+            <span className={styles.footnoteText}>{t.capabilities.productionProvenDesc}</span>
           </div>
 
           {/* Flip Back Hint */}
           <div className={styles.flipHint}>
             <RotateCcw size={13} className={styles.hintRotate} />
-            <span>Back to overview</span>
+            <span>{t.capabilities.backToOverview}</span>
           </div>
         </div>
       </div>

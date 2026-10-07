@@ -62,13 +62,13 @@ export const Contact: React.FC = () => {
       } else {
         setStatus("error");
         setErrorMessage(
-          data.error || "Unable to deliver message right now. Please try again."
+          data.error || t.contact.errorGeneric
         );
       }
     } catch {
       setStatus("error");
       setErrorMessage(
-        "Network connection error. You can also contact me directly via email."
+        t.contact.errorNetwork
       );
     }
   };
@@ -123,7 +123,7 @@ export const Contact: React.FC = () => {
 
               {/* Professional & Social Channels */}
               <div className={styles.socialGroup}>
-                <span className={styles.socialGroupTitle}>Connect & Follow</span>
+                <span className={styles.socialGroupTitle}>{t.contact.connectFollow}</span>
                 <div className={styles.socialPillsGrid}>
                   <a
                     href="https://www.linkedin.com/in/matthewsgana"
@@ -152,7 +152,7 @@ export const Contact: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.socialPill}
-                    aria-label="YouTube: Learn With Matthew Gana"
+                    aria-label={t.contact.youtubeAriaLabel}
                   >
                     <span className={styles.socialIconWrap}><Youtube size={17} /></span>
                     <span>YouTube</span>
@@ -163,7 +163,7 @@ export const Contact: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.socialPill}
-                    aria-label="Instagram: @learnwithmatthewgana"
+                    aria-label={t.contact.instagramAriaLabel}
                   >
                     <span className={styles.socialIconWrap}><Instagram size={17} /></span>
                     <span>Instagram</span>
@@ -174,7 +174,7 @@ export const Contact: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.socialPill}
-                    aria-label="Facebook: Matthew Gana"
+                    aria-label={t.contact.facebookAriaLabel}
                   >
                     <span className={styles.socialIconWrap}><Facebook size={17} /></span>
                     <span>Facebook</span>
@@ -191,14 +191,12 @@ export const Contact: React.FC = () => {
                 <CheckCircle2 size={36} />
               </div>
 
-              <h3 className={styles.successTitle}>Message Delivered!</h3>
+              <h3 className={styles.successTitle}>{t.contact.successTitle}</h3>
 
               <p className={styles.successDesc}>
-                Thank you, <strong>{sentInfo.name || "there"}</strong>! Your inquiry was sent directly to my inbox at{" "}
-                <span style={{ color: "var(--accent-primary)", fontWeight: 700 }}>
-                  matthewgana95@gmail.com
-                </span>
-                . I will review it and reply back to <strong>{sentInfo.email}</strong> shortly.
+                {t.contact.successDesc
+                  .replace("{name}", sentInfo.name || "")
+                  .replace("{email}", sentInfo.email)}
               </p>
 
               <button
@@ -207,7 +205,7 @@ export const Contact: React.FC = () => {
                 onClick={() => setStatus("idle")}
               >
                 <RotateCcw size={16} />
-                <span>Send another message</span>
+                <span>{t.contact.sendAnother}</span>
               </button>
             </div>
           ) : (
@@ -235,7 +233,7 @@ export const Contact: React.FC = () => {
                       href="mailto:matthewgana95@gmail.com"
                       className={styles.fallbackMailLink}
                     >
-                      Email directly instead
+                      {t.contact.errorFallback}
                     </a>
                   </div>
                 </div>
@@ -317,7 +315,7 @@ export const Contact: React.FC = () => {
                 {status === "submitting" ? (
                   <>
                     <Loader2 size={17} className={styles.spinner} />
-                    <span>Sending message...</span>
+                    <span>{t.contact.sending}</span>
                   </>
                 ) : (
                   <>
@@ -328,7 +326,7 @@ export const Contact: React.FC = () => {
               </button>
 
               <p className={styles.formNotice}>
-                Messages are delivered directly to matthewgana95@gmail.com with instant in-page confirmation.
+                {t.contact.formNotice}
               </p>
             </form>
           )}
