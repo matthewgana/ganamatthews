@@ -47,7 +47,8 @@ export const en = {
     verifiedSystems: "11 Systems Audited & Verified",
     scrollToExplore: "SCROLL TO EXPLORE",
     exploreTechStack: "Explore tech stack and architecture",
-    scrollDown: "Scroll down to projects"
+    scrollDown: "Scroll down to projects",
+    mobileSubtitle: "I build scalable backend systems, SaaS platforms, and production-ready AI/ML integrations."
   },
   credibility: {
     badge: "VERIFIED TRACK RECORD",

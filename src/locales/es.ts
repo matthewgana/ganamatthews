@@ -49,7 +49,8 @@ export const es: typeof en = {
     verifiedSystems: "11 Sistemas Auditados y Verificados",
     scrollToExplore: "DESPLAZAR PARA EXPLORAR",
     exploreTechStack: "Explorar stack y arquitectura",
-    scrollDown: "Desplazarse a los proyectos"
+    scrollDown: "Desplazarse a los proyectos",
+    mobileSubtitle: "Construyo sistemas backend escalables, plataformas SaaS e integraciones de IA/ML listas para producción."
   },
   credibility: {
     badge: "TRAYECTORIA VERIFICADA",

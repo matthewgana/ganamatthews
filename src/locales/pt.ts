@@ -49,7 +49,8 @@ export const pt: typeof en = {
     verifiedSystems: "11 Sistemas Auditados e Verificados",
     scrollToExplore: "ROLAR PARA EXPLORAR",
     exploreTechStack: "Explorar stack e arquitetura",
-    scrollDown: "Rolar para os projetos"
+    scrollDown: "Rolar para os projetos",
+    mobileSubtitle: "Construo sistemas backend escaláveis, plataformas SaaS e integrações de IA/ML prontas para produção."
   },
   credibility: {
     badge: "HISTÓRICO COMPROVADO",

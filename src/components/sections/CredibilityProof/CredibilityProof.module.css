@@ -197,3 +197,46 @@
     transform: translateY(4px);
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE — Compact credibility strip (max-width: 767px)
+   Goal: reduce vertical footprint so FlagshipProjects arrive sooner.
+   Desktop and tablet are entirely unaffected.
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .credibilitySection {
+    padding: 2.25rem 1rem 2rem;
+  }
+
+  .headerRow {
+    margin: 0 auto 1.5rem;
+  }
+
+  /* Hide subtitle on mobile — the 4 metric cards convey the same info */
+  .subtitle {
+    display: none;
+  }
+
+  .proofGrid {
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .proofCard {
+    padding: 1.1rem 1rem;
+  }
+
+  .metricCount {
+    font-size: 1.5rem;
+  }
+
+  .metricLabel {
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .metricDetail {
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+}

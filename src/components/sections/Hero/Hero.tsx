@@ -61,7 +61,8 @@ export const Hero: React.FC = () => {
 
           {/* Concise Value Prop */}
           <p className={styles.subtitle}>
-            {t.hero.subtitle}
+            <span className={styles.desktopSubtitle}>{t.hero.subtitle}</span>
+            <span className={styles.mobileSubtitle}>{t.hero.mobileSubtitle || t.hero.subtitle}</span>
           </p>
 
           {/* Skills / Tech Stack — Desktop specialties rail */}

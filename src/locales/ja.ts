@@ -49,7 +49,8 @@ export const ja: typeof en = {
     verifiedSystems: "11件のシステムを検証・監査済み",
     scrollToExplore: "スクロールして探索",
     exploreTechStack: "技術スタックとアーキテクチャを探索",
-    scrollDown: "プロジェクト一覧へスクロール"
+    scrollDown: "プロジェクト一覧へスクロール",
+    mobileSubtitle: "スケーラブルなバックエンドシステム、SaaSプラットフォーム、本番環境対応のAI/MLインテグレーションを構築します。"
   },
   credibility: {
     badge: "検証された実績",

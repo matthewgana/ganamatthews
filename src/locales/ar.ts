@@ -49,7 +49,8 @@ export const ar: typeof en = {
     verifiedSystems: "11 نظاماً تم تدقيقها والتحقق منها برمجياً",
     scrollToExplore: "مرر للاستكشاف",
     exploreTechStack: "استكشاف المنظومة التقنية والهندسة المعمارية",
-    scrollDown: "مرر لأسفل إلى المشاريع"
+    scrollDown: "مرر لأسفل إلى المشاريع",
+    mobileSubtitle: "أبني أنظمة خلفية قابلة للتوسع، ومنصات SaaS، وتكاملات ذكاء اصطناعي جاهزة للإنتاج."
   },
   credibility: {
     badge: "سجل إنجازات موثق",

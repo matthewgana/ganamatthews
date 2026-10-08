@@ -196,6 +196,14 @@
   max-width: 560px;
 }
 
+.desktopSubtitle {
+  display: inline;
+}
+
+.mobileSubtitle {
+  display: none;
+}
+
 /* ── Desktop Specialization Rail ── */
 .desktopSpecialties {
   display: flex;
@@ -523,11 +531,13 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 899px) {
   .hero {
-    min-height: calc(100vh - var(--header-height));
-    padding: 1.75rem 1.25rem 2.75rem;
+    /* Mobile: auto height so content drives the section height,
+       not the viewport — allows Featured Projects to arrive sooner */
+    min-height: auto;
+    padding: 2rem 1.25rem 2.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: stretch;
     position: relative;
     overflow: hidden;
@@ -541,7 +551,7 @@
 
   .content {
     max-width: 100%;
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   /* Pill Badge — Focused Glass Pill */
@@ -587,10 +597,18 @@
 
   /* Subtitle — Concise, highly readable value prop */
   .subtitle {
-    font-size: 0.98rem;
-    line-height: 1.62;
+    font-size: 0.96rem;
+    line-height: 1.58;
     color: var(--text-secondary);
     max-width: 100%;
+  }
+
+  .desktopSubtitle {
+    display: none;
+  }
+
+  .mobileSubtitle {
+    display: inline;
   }
 
   /* Desktop specialities hidden on mobile */
@@ -785,8 +803,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.45rem;
-    margin-top: 1.5rem;
+    gap: 0.4rem;
+    margin-top: 1rem;
     margin-bottom: 0.25rem;
     position: relative;
     z-index: 3;

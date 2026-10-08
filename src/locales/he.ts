@@ -49,7 +49,8 @@ export const he: typeof en = {
     verifiedSystems: "11 מערכות נבדקו ואומתו הנדסית",
     scrollToExplore: "גלול לגילוי",
     exploreTechStack: "חקור את סטאק הטכנולוגיות והארכיטקטורה",
-    scrollDown: "גלול מטה לפרויקטים"
+    scrollDown: "גלול מטה לפרויקטים",
+    mobileSubtitle: "אני בונה מערכות בקנד שרת סקלאביליות, פלטפורמות SaaS ואינטגרציות AI/ML מוכנות לסביבת ייצור."
   },
   credibility: {
     badge: "רקורד מוכח ומאומת",

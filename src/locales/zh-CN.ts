@@ -49,7 +49,8 @@ export const zhCN: typeof en = {
     verifiedSystems: "11项工程系统通过实机代码审计与验证",
     scrollToExplore: "向下滚动探索",
     exploreTechStack: "探索技术栈与架构设计",
-    scrollDown: "滚动至项目列表"
+    scrollDown: "滚动至项目列表",
+    mobileSubtitle: "我构建可扩展的后端系统、SaaS平台及生产就绪的AI/ML集成方案。"
   },
   credibility: {
     badge: "实机验证工程实绩",
